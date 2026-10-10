@@ -106,7 +106,7 @@ Flags: runs = executes or emulates target code, or loads third-party plugins and
 - [hermes-dec](https://github.com/P1sec/hermes-dec): React Native Hermes bytecode disassembler and decompiler. (last push 2026-08-11; cost: Free)
 - [pyinstxtractor](https://github.com/extremecoders-re/pyinstxtractor): PyInstaller: extracts the bundled .pyc files. (last push 2026-07-22; cost: Free)
 - [pycdc](https://github.com/zrax/pycdc): Python bytecode decompiler. (last push 2026-04-07; cost: Free)
-- [GDRE Tools](https://github.com/GDRETools/gdsdecomp): Godot: recovers projects and decompiles GDScript. (last push 2026-10-08; cost: Free)
+- [GDRE Tools](https://github.com/GDRETools/gdsdecomp): Godot: recovers projects and decompiles GDScript. (last push 2026-10-10; cost: Free)
 - [@electron/asar](https://github.com/electron/asar): Electron: extract app.asar to read the app's JavaScript; pin the version. (last push 2026-10-09; cost: Free)
 - [WABT](https://github.com/WebAssembly/wabt): WebAssembly: wasm2wat, wasm-objdump and wasm-decompile to C-like pseudocode. (last push 2026-10-05; cost: Free)
 - [Cpp2IL](https://github.com/SamboyCoding/Cpp2IL): Unity IL2CPP to IL recovery; work in progress, check supported Unity versions, use on your own builds. (last push 2026-09-15; cost: Free)

@@ -49,7 +49,7 @@
     "verified": "2026-10-10"
   },
   "NationalSecurityAgency/ghidra": {
-    "stars": 82225,
+    "stars": 82232,
     "pushed": "2026-10-09",
     "archived": false,
     "full": "NationalSecurityAgency/ghidra",
@@ -126,7 +126,7 @@
     "verified": "2026-10-10"
   },
   "frida/frida": {
-    "stars": 22161,
+    "stars": 22162,
     "pushed": "2026-10-10",
     "archived": false,
     "full": "frida/frida",
@@ -259,14 +259,14 @@
     "verified": "2026-10-10"
   },
   "icsharpcode/ILSpy": {
-    "stars": 26492,
+    "stars": 26494,
     "pushed": "2026-10-09",
     "archived": false,
     "full": "icsharpcode/ILSpy",
     "verified": "2026-10-10"
   },
   "dnSpyEx/dnSpy": {
-    "stars": 11212,
+    "stars": 11213,
     "pushed": "2026-08-25",
     "archived": false,
     "full": "dnSpyEx/dnSpy",
@@ -323,7 +323,7 @@
   },
   "GDRETools/gdsdecomp": {
     "stars": 4302,
-    "pushed": "2026-10-08",
+    "pushed": "2026-10-10",
     "archived": false,
     "full": "GDRETools/gdsdecomp",
     "verified": "2026-10-10"
@@ -441,21 +441,21 @@
     "verified": "2026-10-10"
   },
   "morluto/rea": {
-    "stars": 48992,
+    "stars": 49250,
     "pushed": "2026-10-10",
     "archived": false,
     "full": "morluto/rea",
     "verified": "2026-10-10"
   },
   "HexRaysSA/ida-mcp": {
-    "stars": 895,
+    "stars": 896,
     "pushed": "2026-10-08",
     "archived": false,
     "full": "HexRaysSA/ida-mcp",
     "verified": "2026-10-10"
   },
   "mrexodia/ida-pro-mcp": {
-    "stars": 12590,
+    "stars": 12591,
     "pushed": "2026-09-26",
     "archived": false,
     "full": "mrexodia/ida-pro-mcp",
@@ -469,7 +469,7 @@
     "verified": "2026-10-10"
   },
   "bethington/ghidra-mcp": {
-    "stars": 5205,
+    "stars": 5207,
     "pushed": "2026-10-09",
     "archived": false,
     "full": "bethington/ghidra-mcp",
@@ -651,7 +651,7 @@
     "verified": "2026-10-10"
   },
   "androguard/androguard": {
-    "stars": 6335,
+    "stars": 6336,
     "pushed": "2026-10-03",
     "archived": false,
     "full": "androguard/androguard",
@@ -665,7 +665,7 @@
     "verified": "2026-10-10"
   },
   "SamboyCoding/Cpp2IL": {
-    "stars": 2911,
+    "stars": 2913,
     "pushed": "2026-09-15",
     "archived": false,
     "full": "SamboyCoding/Cpp2IL",
