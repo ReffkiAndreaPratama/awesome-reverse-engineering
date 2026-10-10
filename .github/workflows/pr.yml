@@ -1,0 +1,25 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate data.json and check generated files are up to date
+        run: node scripts/build.mjs --check
+      - name: Check links in the proposed README
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: --no-progress --config lychee.toml README.md GRAVEYARD.md llms.txt
+          fail: true

@@ -1,0 +1,11 @@
+# Hosts that block automated requests but load in a browser. Everything else must return 2xx.
+exclude = [
+  "^https://reverseengineering\\.stackexchange\\.com",
+  "^https://www\\.hopperapp\\.com",
+  "^https://dedaub\\.com",
+  "^https://app\\.dedaub\\.com",
+  "^https://www\\.root-me\\.org",
+]
+max_retries = 3
+include_fragments = true
+accept = ["200..=206"]

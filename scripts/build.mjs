@@ -173,6 +173,29 @@ function statsSvg(stale, refreshed) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Entries per category"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#4338ca"/><stop offset="1" stop-color="#7c3aed"/></linearGradient><style>.l{font:13px Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#374151}.n{font:600 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#4338ca}.h{font:700 14px Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#111827}.s{font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#6b7280}</style></defs><rect width="${W}" height="${H}" rx="14" fill="#fbfbff" stroke="#e0e7ff"/><text x="24" y="28" class="h">${data.entries.length} entries across ${rows.length} categories</text><text x="${W - 24}" y="28" text-anchor="end" class="s">GitHub data ${refreshed} · ${stale.length} flagged</text>${bars}</svg>\n`;
 }
 
+
+// Align markdown table pipes (awesome-lint table-pipe-alignment). Width counts emoji as 2 columns.
+const width = s => [...s.replace(/️/g, '')].reduce((w, ch) => w + (/\p{Extended_Pictographic}/u.test(ch) && ch.codePointAt(0) > 0xff ? 2 : 1), 0);
+function alignTables(md) {
+  const lines = md.split('\n');
+  const split = l => l.trim().replace(/^\||\|$/g, '').split(/(?<!\\)\|/).map(c => c.trim());
+  let inCode = false;
+  for (let i = 0; i < lines.length; i++) {
+    if (lines[i].startsWith('```')) inCode = !inCode;
+    if (inCode || !lines[i].startsWith('|')) continue;
+    let j = i;
+    while (j < lines.length && lines[j].startsWith('|')) j++;
+    const rows = lines.slice(i, j).map(split);
+    const n = Math.max(...rows.map(r => r.length));
+    const w = Array.from({ length: n }, (_, k) => Math.max(3, ...rows.map((r, ri) => (ri === 1 ? 3 : width(r[k] || '')))));
+    for (let r = 0; r < rows.length; r++) {
+      lines[i + r] = '| ' + w.map((cw, k) => (r === 1 ? '-'.repeat(cw) : (rows[r][k] || '') + ' '.repeat(cw - width(rows[r][k] || '')))).join(' | ') + ' |';
+    }
+    i = j - 1;
+  }
+  return lines.join('\n');
+}
+
 // ---------- build ----------
 async function main() {
   if (!validate()) return;
@@ -208,8 +231,8 @@ async function main() {
   const intro = fill(readFileSync(join(ROOT, 'content', 'intro.md'), 'utf8'));
   const footer = fill(readFileSync(join(ROOT, 'content', 'footer.md'), 'utf8'));
   const body = [intro.trimEnd(), '', ...sections, footer.trimEnd(), ''].join('\n');
-  const toc = [...body.matchAll(/^## (.+)$/gm)].map(m => `- [${stripEmoji(m[1])}](${slug(m[1])})`).join('\n');
-  out['README.md'] = header.replace('{{TOC}}', toc).trimEnd() + '\n\n' + body;
+  const toc = [...body.matchAll(/^## (.+)$/gm)].filter(m => !/Contributing/.test(m[1])).map(m => `- [${m[1]}](${slug(m[1])})`).join('\n');
+  out['README.md'] = alignTables(header.replace('{{TOC}}', toc).trimEnd() + '\n\n' + body);
 
   out['GRAVEYARD.md'] = [
     '# Graveyard', '',

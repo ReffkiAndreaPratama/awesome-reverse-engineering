@@ -61,13 +61,11 @@ Reverse the stripped -O2 build, then check your answer against the source.
 
 ## Contributing
 
-Contributions welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first. Add entries to [`data.json`](data.json), not the README; `node scripts/build.mjs` regenerates it.
+Contributions welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) first. Add entries to [`data.json`](data.json), not the README; `node scripts/build.mjs --offline` regenerates it and `--check` validates it (CI runs the check on every PR).
 
 - One sentence per entry, ending with a period, saying when the tool is the right choice.
 - Link the official repository or site, never a mirror.
 - Set the safety flags honestly: `runs`, `cloud`, `impersonated`.
 - No tools whose main purpose is cracking licences, bypassing DRM or cheating in online games.
 
-## License
-
-[CC0 1.0](LICENSE). Listed projects keep their own licences.
+Listed projects keep their own licences. This list is released under [CC0 1.0](LICENSE).
