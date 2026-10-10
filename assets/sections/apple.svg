@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 200" width="1280" height="200" role="img" aria-label="iOS &amp; macOS: 2 entries">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+<pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#e0e7ff"/></pattern><clipPath id="c"><rect width="1280" height="200" rx="18"/></clipPath></defs>
+<rect width="1280" height="200" rx="18" fill="url(#b)"/><rect width="1280" height="200" rx="18" fill="url(#g)" opacity=".6"/>
+<rect x="0.5" y="0.5" width="1279" height="199" rx="18" fill="none" stroke="#e0e7ff"/>
+<rect x="0" y="0" width="12" height="200" fill="#4338ca" clip-path="url(#c)"/>
+<rect x="44" y="30" width="140" height="140" rx="32" fill="#ffffff" stroke="#e0e7ff"/>
+<g transform="translate(74 60) scale(1.67)" fill="none" stroke="#4338ca" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="10" width="22" height="16" rx="2"/><path d="M4 30h30"/><rect x="32" y="16" width="12" height="24" rx="3"/><path d="M36 36h4"/></g>
+<text x="218" y="66" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="22" font-weight="700" fill="#4338ca" letter-spacing="2">11 · 2 ENTRIES</text>
+<text x="216" y="122" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="56" font-weight="800" fill="#111827" letter-spacing="-1">iOS &amp; macOS</text>
+<text x="218" y="164" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="26" fill="#374151">ipsw  ·  Corellium</text>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="16" fill="#4338ca" opacity=".22" text-anchor="end"><text x="1236" y="58">72 89 a0 b7 ce e5</text><text x="1236" y="84">7d 94 ab c2 d9 f0</text><text x="1236" y="110">88 9f b6 cd e4 fb</text><text x="1236" y="136">93 aa c1 d8 ef 06</text><text x="1236" y="162">9e b5 cc e3 fa 11</text></g>
+</svg>

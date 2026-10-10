@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 200" width="1280" height="200" role="img" aria-label="Smart Contracts &amp; EVM: 7 entries">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+<pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#e0e7ff"/></pattern><clipPath id="c"><rect width="1280" height="200" rx="18"/></clipPath></defs>
+<rect width="1280" height="200" rx="18" fill="url(#b)"/><rect width="1280" height="200" rx="18" fill="url(#g)" opacity=".6"/>
+<rect x="0.5" y="0.5" width="1279" height="199" rx="18" fill="none" stroke="#e0e7ff"/>
+<rect x="0" y="0" width="12" height="200" fill="#7c3aed" clip-path="url(#c)"/>
+<rect x="44" y="30" width="140" height="140" rx="32" fill="#ffffff" stroke="#e0e7ff"/>
+<g transform="translate(74 60) scale(1.67)" fill="none" stroke="#7c3aed" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="18" width="13" height="13" rx="2"/><rect x="29" y="18" width="13" height="13" rx="2"/><path d="M19 24h10"/><path d="M12 18v-6h24v6M12 31v6h24v-6"/></g>
+<text x="218" y="66" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="22" font-weight="700" fill="#7c3aed" letter-spacing="2">15 · 7 ENTRIES</text>
+<text x="216" y="122" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="56" font-weight="800" fill="#111827" letter-spacing="-1">Smart Contracts &amp; EVM</text>
+<text x="218" y="164" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="26" fill="#374151">heimdall-rs  ·  EVMole  ·  WhatsABI</text>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="16" fill="#7c3aed" opacity=".22" text-anchor="end"><text x="1236" y="58">06 1d 34 4b 62 79</text><text x="1236" y="84">11 28 3f 56 6d 84</text><text x="1236" y="110">1c 33 4a 61 78 8f</text><text x="1236" y="136">27 3e 55 6c 83 9a</text><text x="1236" y="162">32 49 60 77 8e a5</text></g>
+</svg>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 200" width="1280" height="200" role="img" aria-label="AI-Assisted RE &amp; MCP Servers: 14 entries">
+<defs><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef2ff"/></linearGradient>
+<pattern id="g" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#e0e7ff"/></pattern><clipPath id="c"><rect width="1280" height="200" rx="18"/></clipPath></defs>
+<rect width="1280" height="200" rx="18" fill="url(#b)"/><rect width="1280" height="200" rx="18" fill="url(#g)" opacity=".6"/>
+<rect x="0.5" y="0.5" width="1279" height="199" rx="18" fill="none" stroke="#e0e7ff"/>
+<rect x="0" y="0" width="12" height="200" fill="#9333ea" clip-path="url(#c)"/>
+<rect x="44" y="30" width="140" height="140" rx="32" fill="#ffffff" stroke="#e0e7ff"/>
+<g transform="translate(74 60) scale(1.67)" fill="none" stroke="#9333ea" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="12" width="24" height="24" rx="4"/><path d="M19 6v6M29 6v6M19 36v6M29 36v6M6 19h6M6 29h6M36 19h6M36 29h6"/><path d="M24 17l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></g>
+<text x="218" y="66" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="22" font-weight="700" fill="#9333ea" letter-spacing="2">16 · 14 ENTRIES</text>
+<text x="216" y="122" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="56" font-weight="800" fill="#111827" letter-spacing="-1">AI-Assisted RE &amp; MCP Servers</text>
+<text x="218" y="164" font-family="Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="26" fill="#374151">REA  ·  IDA MCP (official)  ·  Ghidra MCP Server</text>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="16" fill="#9333ea" opacity=".22" text-anchor="end"><text x="1236" y="58">2b 42 59 70 87 9e</text><text x="1236" y="84">36 4d 64 7b 92 a9</text><text x="1236" y="110">41 58 6f 86 9d b4</text><text x="1236" y="136">4c 63 7a 91 a8 bf</text><text x="1236" y="162">57 6e 85 9c b3 ca</text></g>
+</svg>

@@ -1,36 +1,38 @@
 {
-  "date": "2026-10-10",
-  "entries": 110,
-  "stale": [
+  "reviewed": "2026-10-10",
+  "refreshed": "2026-10-10",
+  "entries": 135,
+  "flaggedForSafety": 51,
+  "maintenance": [
+    {
+      "name": "RetDec",
+      "repo": "avast/retdec",
+      "note": "Limited maintenance mode, per its README"
+    },
     {
       "name": "Il2CppDumper",
       "repo": "Perfare/Il2CppDumper",
-      "pushed": "2024-08-18",
-      "archived": false
+      "note": "No push since 2024-08-18"
     },
     {
       "name": "Panoramix",
       "repo": "palkeo/panoramix",
-      "pushed": "2024-08-04",
-      "archived": false
+      "note": "No push since 2024-08-04"
     },
     {
       "name": "GhidraMCP",
       "repo": "LaurieWired/GhidraMCP",
-      "pushed": "2025-06-23",
-      "archived": false
+      "note": "No push since 2025-06-23"
     },
     {
       "name": "RPISEC MBE",
       "repo": "RPISEC/MBE",
-      "pushed": "2021-12-09",
-      "archived": false
+      "note": "No push since 2021-12-09"
     },
     {
       "name": "Damn Vulnerable DeFi",
       "repo": "theredguild/damn-vulnerable-defi",
-      "pushed": "2025-03-21",
-      "archived": false
+      "note": "No push since 2025-03-21"
     }
   ]
 }

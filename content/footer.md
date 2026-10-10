@@ -1,4 +1,4 @@
-## 🗺️ A 12-Week Path
+## 📅 A 12-Week Path
 
 | Weeks | Goal | Do |
 |-------|------|----|
@@ -19,19 +19,19 @@
 
 **Look up a file by hash without uploading it**
 ```bash
-sha256sum sample.bin
-curl -s -H "x-apikey: $VT_API_KEY" https://www.virustotal.com/api/v3/files/<sha256>
+hash=$(sha256sum sample.bin | cut -d' ' -f1)
+curl -s -H "x-apikey: $VT_API_KEY" "https://www.virustotal.com/api/v3/files/$hash"
 ```
 
-**Sanitize a HAR before sharing it or giving it to an agent**
+**Partially redact a HAR before sharing it**
 ```bash
-jq '(.log.entries[] | .request.headers, .response.headers) |= map(select(.name | test("^(cookie|set-cookie|authorization|proxy-authorization|x-api-key|x-auth-token)$"; "i") | not)) | (.log.entries[] | .request.cookies, .response.cookies) |= []' in.har > clean.har
+jq '(.log.entries[] | .request.headers, .response.headers) |= map(select(.name | test("^(cookie|set-cookie|authorization|proxy-authorization|x-api-key|x-auth-token)$"; "i") | not)) | (.log.entries[] | .request.cookies, .response.cookies) |= []' in.har > redacted.har
 ```
-Then search `clean.har` for tokens left in URLs, query strings or bodies.
+This removes cookies and common auth headers only. URLs, query strings and request and response bodies can still hold tokens and personal data: search `redacted.har` for them before sharing, or share only the entries you need.
 
 **Find a proxy's implementation from raw storage (ERC-1967, read-only)**
 ```bash
-cast storage $ADDR 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc --rpc-url $RPC
+cast storage "$ADDR" 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc --rpc-url "$RPC"
 ```
 
 **Build your own first targets**
@@ -40,12 +40,24 @@ gcc -O0 -g -o prog-O0 prog.c && gcc -O2 -o prog-O2 prog.c && strip prog-O2
 ```
 Reverse the stripped -O2 build, then check your answer against the source.
 
+## 📈 About This List
+
+- **Maintenance data.** Last push, stars and archive status refresh weekly from the GitHub API. A refresh that fails for more than a fifth of repositories fails CI and keeps the previous data, so the date shown is the last successful refresh.
+- **Editorial review.** Flags, costs and descriptions were last reviewed on {{REVIEWED}}. {{FLAGGED}} entries carry a safety flag; {{STALE}} carry a maintenance warning. Changes are logged in [CHANGELOG.md](CHANGELOG.md).
+- **Graveyard.** Archived and replaced tools live in [GRAVEYARD.md](GRAVEYARD.md).
+- **Machine-readable.** [`data.json`](data.json) is the source; [`llms.txt`](llms.txt) and [`report.json`](report.json) carry the same entries with flags and maintenance state.
+
+<p align="center"><img src="assets/stats.svg" alt="Entries per category" width="88%"></p>
+
 ## 🔗 Related Awesome Lists
 
 | List | Description |
 |------|-------------|
-| [awesome-OSINT](https://github.com/edwardtay/awesome-OSINT) | Open-source intelligence tools, including threat intel and malware OSINT. |
-| [awesome-scrapers](https://github.com/edwardtay/awesome-scrapers) | Collection tooling for web data. |
+| [awesome-malware-analysis](https://github.com/rshipp/awesome-malware-analysis) | Malware analysis tools and resources. |
+| [awesome-mobile-security](https://github.com/vaib25vicky/awesome-mobile-security) | Android and iOS security testing. |
+| [awesome-embedded-and-iot-security](https://github.com/fkie-cad/awesome-embedded-and-iot-security) | Embedded and IoT security research. |
+| [OWASP MASTG](https://github.com/OWASP/mastg) | The mobile app security testing guide. |
+| [awesome-OSINT](https://github.com/edwardtay/awesome-OSINT) | Open-source intelligence, including threat intel. |
 
 ## Contributing
 

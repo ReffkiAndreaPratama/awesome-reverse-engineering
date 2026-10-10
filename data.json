@@ -6,6 +6,11 @@
       "intro": "First fifteen minutes on any file: what is it, what built it, is it packed, what can it do."
     },
     {
+      "id": "formats",
+      "title": "🧾 Binary Formats & Hex Editors",
+      "intro": "Read and describe file structures by hand or with a grammar."
+    },
+    {
       "id": "disasm",
       "title": "🧠 Disassemblers & Decompilers",
       "intro": "The engines everything else plugs into."
@@ -21,13 +26,18 @@
       "intro": "Hook, trace or emulate code without a full debugger session."
     },
     {
+      "id": "memory",
+      "title": "🩻 Memory & Process Analysis",
+      "intro": "Inspect a live process or an offline memory image."
+    },
+    {
       "id": "frameworks",
       "title": "🧮 Analysis Frameworks & Libraries",
       "intro": "Build your own analysis: parsing, disassembly, symbolic execution."
     },
     {
       "id": "diff",
-      "title": "↔️ Binary Diffing",
+      "title": "🔀 Binary Diffing",
       "intro": "Compare two builds to find a feature or a fix fast."
     },
     {
@@ -62,13 +72,14 @@
     },
     {
       "id": "evm",
-      "title": "⛓️ Smart Contracts & EVM",
+      "title": "💎 Smart Contracts & EVM",
       "intro": "Read unverified bytecode before you interact with it. Read-only, no wallet needed."
     },
     {
       "id": "ai",
       "title": "🦾 AI-Assisted RE & MCP Servers",
-      "intro": "Agents driving the engines above. Treat every model claim as a hypothesis, keep approvals on, and run them inside the lab VM."
+      "intro": "Agents and plugins driving the engines above, grouped by engine. Treat every model claim as a hypothesis, keep approvals on, and run servers inside the lab VM.",
+      "extra": "**MCP servers at a glance** (from each project's README, {{REVIEWED}})\n\n| Server | Engine | Transport | High-impact capabilities |\n|---|---|---|---|\n| REA | Ghidra, IDA, Hopper, JADX, Binwalk, browser, processes | Local MCP | Runtime capture runs targets with your permissions; no sandbox documented |\n| IDA MCP (official) | IDA 9.4+ with idalib | stdio or Streamable HTTP | Agent-written idalib scripts (\"code mode\") |\n| IDA Pro MCP | IDA Pro 8.3+ | stdio or loopback HTTP/SSE | `py_eval`, patching, debugger tools (opt-in) |\n| GhidraMCP | Ghidra | Unauthenticated HTTP on localhost:8080, stdio or SSE bridge | Renaming |\n| ReVa | Ghidra 12.0+ | Streamable HTTP on 8080, optional API key | PyGhidra scripting on by default |\n| Binary Ninja MCP | Binary Ninja | Built in | Headless use needs Commercial or Ultimate |\n| radare2 MCP | radare2 | stdio | radare2 commands |"
     },
     {
       "id": "lab",
@@ -83,7 +94,7 @@
     {
       "id": "practice",
       "title": "🎯 Practice Targets",
-      "intro": "Legal targets, ranked from nothing-runs-locally to Windows VM required."
+      "intro": "Legal targets, ordered from browser-only exercises to downloaded binaries that need a Windows VM."
     }
   ],
   "entries": [
@@ -106,7 +117,10 @@
       "n": "FLOSS",
       "u": "https://github.com/mandiant/flare-floss",
       "cost": "Free",
-      "d": "Extracts obfuscated and stack-built strings that plain `strings` misses."
+      "d": "Extracts obfuscated and stack-built strings that plain `strings` misses.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "triage",
@@ -137,14 +151,55 @@
       "d": "Reports RELRO, canaries, NX, PIE and FORTIFY; now written in Go (`checksec file <bin>`)."
     },
     {
+      "n": "pestudio",
+      "u": "https://www.winitor.com/",
+      "cost": "Free · Paid",
+      "d": "Static Windows executable triage: imports, strings, indicators.",
+      "c": "triage"
+    },
+    {
+      "n": "ImHex",
+      "u": "https://github.com/WerWolv/ImHex",
+      "cost": "Free",
+      "d": "Hex editor with a pattern language, data inspector and diffing for reverse engineering file formats.",
+      "c": "formats"
+    },
+    {
+      "n": "010 Editor",
+      "u": "https://www.sweetscape.com/010editor/",
+      "cost": "Paid",
+      "d": "Commercial hex editor whose binary templates parse hundreds of formats.",
+      "c": "formats"
+    },
+    {
+      "n": "Kaitai Struct",
+      "u": "https://kaitai.io/",
+      "r": "kaitai-io/kaitai_struct",
+      "cost": "Free",
+      "d": "Declarative format descriptions that compile to parsers in many languages, plus a web IDE.",
+      "c": "formats"
+    },
+    {
+      "n": "Malcat",
+      "u": "https://malcat.fr/",
+      "cost": "Free · Paid",
+      "f": [
+        "runs"
+      ],
+      "d": "Hex editor, disassembler and analyser in one for fast file triage.",
+      "c": "formats"
+    },
+    {
       "c": "disasm",
       "n": "Ghidra",
-      "u": "https://github.com/NationalSecurityAgency/ghidra",
+      "u": "https://ghidra-sre.org/",
       "cost": "Free",
       "f": [
-        "impersonated"
+        "impersonated",
+        "runs"
       ],
-      "d": "NSA's decompiler with scripting, BSim similarity search and a team server. Many 2026 advisories: stay on the latest release."
+      "d": "NSA's decompiler with scripting, BSim similarity search and a team server. Many 2026 advisories: stay on the latest release.",
+      "r": "NationalSecurityAgency/ghidra"
     },
     {
       "c": "disasm",
@@ -153,7 +208,8 @@
       "cost": "Paid · Free tier",
       "f": [
         "cloud",
-        "impersonated"
+        "impersonated",
+        "runs"
       ],
       "d": "Industry standard. Free, Home and Pro Essential decompile in the cloud; never use cracked builds."
     },
@@ -162,7 +218,10 @@
       "n": "Binary Ninja",
       "u": "https://binary.ninja/",
       "cost": "Paid · Free tier",
-      "d": "Layered intermediate languages that suit scripting; the free edition includes a local MCP server and debugger."
+      "d": "Layered intermediate languages that suit scripting; the free edition includes a local MCP server and debugger.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "disasm",
@@ -179,38 +238,49 @@
       "n": "Rizin",
       "u": "https://github.com/rizinorg/rizin",
       "cost": "Free",
-      "d": "radare2 fork focused on usability and a stable API."
+      "d": "radare2 fork focused on usability and a stable API.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "disasm",
       "n": "Cutter",
       "u": "https://github.com/rizinorg/cutter",
       "cost": "Free",
-      "d": "Rizin GUI with the Ghidra decompiler built in."
+      "d": "Rizin GUI with the Ghidra decompiler built in.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "disasm",
       "n": "Hopper",
       "u": "https://www.hopperapp.com/",
       "cost": "Paid",
-      "d": "Affordable disassembler for macOS and Linux with strong Mach-O and Objective-C support."
+      "d": "Affordable disassembler for macOS and Linux with strong Mach-O and Objective-C support.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "disasm",
       "n": "RetDec",
       "u": "https://github.com/avast/retdec",
       "cost": "Free",
-      "d": "LLVM-based retargetable decompiler."
+      "d": "LLVM-based retargetable decompiler.",
+      "m": "Limited maintenance mode, per its README"
     },
     {
       "c": "disasm",
       "n": "Decompiler Explorer",
-      "u": "https://github.com/decompiler-explorer/decompiler-explorer",
+      "u": "https://dogbolt.org/",
       "cost": "Free",
       "f": [
         "cloud"
       ],
-      "d": "Runs one small binary through many decompilers side by side (dogbolt.org). Uploads are kept and shared with tool authors."
+      "d": "Runs one small binary through many decompilers side by side (dogbolt.org). Uploads are kept and shared with tool authors.",
+      "r": "decompiler-explorer/decompiler-explorer"
     },
     {
       "c": "debug",
@@ -231,6 +301,26 @@
         "runs"
       ],
       "d": "Microsoft's debugger with Time Travel Debugging: record once, step backwards."
+    },
+    {
+      "c": "debug",
+      "n": "GDB",
+      "u": "https://www.sourceware.org/gdb/",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "The GNU debugger; the base pwndbg and GEF build on."
+    },
+    {
+      "c": "debug",
+      "n": "LLDB",
+      "u": "https://lldb.llvm.org/",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "LLVM debugger, default on macOS and for Swift and Rust."
     },
     {
       "c": "debug",
@@ -297,7 +387,10 @@
       "n": "Unicorn",
       "u": "https://github.com/unicorn-engine/unicorn",
       "cost": "Free",
-      "d": "CPU emulator for running a snippet (a decode loop) without running the program."
+      "d": "CPU emulator for running a snippet (a decode loop) without running the program.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "instr",
@@ -320,32 +413,89 @@
       "d": "Dynamic binary instrumentation for tracing and coverage."
     },
     {
+      "n": "QBDI",
+      "u": "https://github.com/QBDI/QBDI",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "Dynamic binary instrumentation framework for x86, x86-64, ARM and AArch64.",
+      "c": "instr"
+    },
+    {
+      "n": "QEMU",
+      "u": "https://www.qemu.org/",
+      "r": "qemu/qemu",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "Full-system and user-mode emulation; user mode forwards syscalls to the host kernel, so only inside a VM.",
+      "c": "instr"
+    },
+    {
+      "n": "Sysinternals",
+      "u": "https://learn.microsoft.com/en-us/sysinternals/",
+      "cost": "Free",
+      "d": "Process Explorer, Process Monitor and friends for watching what a Windows program does.",
+      "c": "memory"
+    },
+    {
+      "n": "Volatility 3",
+      "u": "https://github.com/volatilityfoundation/volatility3",
+      "cost": "Free",
+      "d": "Offline memory image analysis: processes, modules, handles, network.",
+      "c": "memory"
+    },
+    {
+      "n": "PE-sieve",
+      "u": "https://github.com/hasherezade/pe-sieve",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "Scans a running process for implants, hooks and in-memory patches and dumps them.",
+      "c": "memory"
+    },
+    {
       "c": "frameworks",
       "n": "angr",
       "u": "https://github.com/angr/angr",
       "cost": "Free",
-      "d": "Symbolic execution and CFG recovery in Python; the standard for solving crackmes programmatically."
+      "d": "Symbolic execution and CFG recovery in Python; the standard for solving crackmes programmatically.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "frameworks",
       "n": "angr management",
       "u": "https://github.com/angr/angr-management",
       "cost": "Free",
-      "d": "GUI for angr."
+      "d": "GUI for angr.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "frameworks",
       "n": "Triton",
       "u": "https://github.com/JonathanSalwan/Triton",
       "cost": "Free",
-      "d": "Dynamic symbolic execution and taint analysis library."
+      "d": "Dynamic symbolic execution and taint analysis library.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "frameworks",
       "n": "Miasm",
       "u": "https://github.com/cea-sec/miasm",
       "cost": "Free",
-      "d": "Reverse engineering framework with IR, emulation and deobfuscation helpers."
+      "d": "Reverse engineering framework with IR, emulation and deobfuscation helpers.",
+      "f": [
+        "runs"
+      ]
     },
     {
       "c": "frameworks",
@@ -394,7 +544,7 @@
       "n": "JADX",
       "u": "https://github.com/skylot/jadx",
       "cost": "Free",
-      "d": "DEX to Java decompiler with GUI; static and safe to read."
+      "d": "DEX to Java decompiler with GUI; static analysis of APKs."
     },
     {
       "c": "android",
@@ -408,7 +558,7 @@
       "n": "JEB",
       "u": "https://www.pnfsoftware.com/",
       "cost": "Paid",
-      "d": "Commercial decompiler that copes best with obfuscated Android code."
+      "d": "Commercial decompiler aimed at obfuscated Android and Dalvik code."
     },
     {
       "c": "android",
@@ -432,7 +582,24 @@
       "n": "MobSF",
       "u": "https://github.com/MobSF/Mobile-Security-Framework-MobSF",
       "cost": "Free",
-      "d": "Automated static and dynamic mobile app audit; run the Docker image bound to localhost."
+      "d": "Automated static and dynamic mobile app audit; run the Docker image bound to localhost.",
+      "f": [
+        "runs"
+      ]
+    },
+    {
+      "n": "Androguard",
+      "u": "https://github.com/androguard/androguard",
+      "cost": "Free",
+      "d": "Python library for scripting APK, DEX and manifest analysis.",
+      "c": "android"
+    },
+    {
+      "n": "Recaf",
+      "u": "https://github.com/Col-E/Recaf",
+      "cost": "Free",
+      "d": "Modern Java bytecode editor and decompiler front end.",
+      "c": "android"
     },
     {
       "c": "dotnet",
@@ -442,7 +609,7 @@
       "f": [
         "impersonated"
       ],
-      "d": "Static .NET decompiler; the safest way to read managed code. ilspy.org is not official."
+      "d": "Static .NET decompiler for reading managed code without running it. ilspy.org is not official."
     },
     {
       "c": "dotnet",
@@ -536,6 +703,13 @@
       "d": "WebAssembly: wasm2wat, wasm-objdump and wasm-decompile to C-like pseudocode."
     },
     {
+      "n": "Cpp2IL",
+      "u": "https://github.com/SamboyCoding/Cpp2IL",
+      "cost": "Free",
+      "d": "Unity IL2CPP to IL recovery; work in progress, check supported Unity versions, use on your own builds.",
+      "c": "runtimes"
+    },
+    {
       "c": "web",
       "n": "webcrack",
       "u": "https://github.com/j4k0xb/webcrack",
@@ -565,6 +739,28 @@
       "u": "https://www.wireshark.org/",
       "cost": "Free",
       "d": "Packet analysis; never run the GUI as root."
+    },
+    {
+      "n": "Chrome DevTools",
+      "u": "https://developer.chrome.com/docs/devtools/",
+      "cost": "Free",
+      "d": "Sources with source maps, network panel and HAR export; use a separate browser profile with no wallet.",
+      "c": "web"
+    },
+    {
+      "n": "Burp Suite",
+      "u": "https://portswigger.net/burp",
+      "cost": "Free · Paid",
+      "d": "Intercepting proxy for testing web apps you are authorised to test.",
+      "c": "web"
+    },
+    {
+      "n": "HTTP Toolkit",
+      "u": "https://httptoolkit.com/",
+      "r": "httptoolkit/httptoolkit-desktop",
+      "cost": "Free · Paid",
+      "d": "One-click interception for browsers, Android, Node and Docker.",
+      "c": "web"
     },
     {
       "c": "firmware",
@@ -615,6 +811,38 @@
       "d": "Parses DJI firmware packages; do not flash modified images to aircraft you fly."
     },
     {
+      "n": "UEFITool",
+      "u": "https://github.com/LongSoft/UEFITool",
+      "cost": "Free",
+      "d": "Parses and extracts UEFI firmware images.",
+      "c": "firmware"
+    },
+    {
+      "n": "OFRAK",
+      "u": "https://github.com/redballoonsecurity/ofrak",
+      "cost": "Free · Paid",
+      "d": "Unpack, analyse, modify and repack firmware in one framework.",
+      "c": "firmware"
+    },
+    {
+      "n": "OpenOCD",
+      "u": "https://openocd.org/",
+      "r": "openocd-org/openocd",
+      "cost": "Free",
+      "f": [
+        "runs"
+      ],
+      "d": "On-chip debugging over JTAG and SWD for hardware you own.",
+      "c": "firmware"
+    },
+    {
+      "n": "sigrok",
+      "u": "https://sigrok.org/",
+      "cost": "Free",
+      "d": "Logic analyser software and protocol decoders for UART, SPI, I2C and more.",
+      "c": "firmware"
+    },
+    {
       "c": "evm",
       "n": "heimdall-rs",
       "u": "https://github.com/Jon-Becker/heimdall-rs",
@@ -650,7 +878,7 @@
       "f": [
         "cloud"
       ],
-      "d": "The most readable hosted decompilation; keep unreleased contracts out."
+      "d": "Hosted decompiler with Solidity-like output; keep unreleased contracts out."
     },
     {
       "c": "evm",
@@ -681,7 +909,7 @@
       "n": "IDA MCP (official)",
       "u": "https://github.com/HexRaysSA/ida-mcp",
       "cost": "Needs IDA Pro",
-      "d": "Hex-Rays' own MCP server; attaches to a GUI database or a headless idalib worker."
+      "d": "Hex-Rays' own server over stdio or Streamable HTTP; needs IDA 9.4+ with idalib and Python 3.11+."
     },
     {
       "c": "ai",
@@ -732,7 +960,7 @@
       "n": "Binary Ninja MCP",
       "u": "https://docs.binary.ninja/guide/mcp.html",
       "cost": "Free tier · Paid",
-      "d": "Built into Binary Ninja, including the free edition."
+      "d": "Built into Binary Ninja; the GUI server works in every edition, headless needs Commercial or Ultimate."
     },
     {
       "c": "ai",
@@ -766,7 +994,7 @@
       "f": [
         "cloud"
       ],
-      "d": "IDA plugin that explains functions and renames variables; works with local models too."
+      "d": "IDA plugin that explains functions and renames variables; sends code to the chosen provider unless you configure a local model."
     },
     {
       "c": "ai",
@@ -776,7 +1004,7 @@
       "f": [
         "cloud"
       ],
-      "d": "LLM chat, RAG and agent mode inside Ghidra with local or hosted models."
+      "d": "LLM chat, RAG and agent mode inside Ghidra; hosted or local models."
     },
     {
       "c": "ai",
@@ -809,9 +1037,13 @@
     {
       "c": "learn",
       "n": "Compiler Explorer",
-      "u": "https://github.com/compiler-explorer/compiler-explorer",
+      "u": "https://godbolt.org/",
       "cost": "Free",
-      "d": "See C and C++ become assembly across compilers and -O levels (godbolt.org)."
+      "d": "See C and C++ become assembly across compilers and -O levels; the hosted site keeps shared links, so self-host for private code.",
+      "r": "compiler-explorer/compiler-explorer",
+      "f": [
+        "cloud"
+      ]
     },
     {
       "c": "learn",
@@ -835,6 +1067,13 @@
       "d": "C, gdb, optimisation and assembly for x86-64 and ARM64 in one free book."
     },
     {
+      "n": "Azeria Labs",
+      "u": "https://azeria-labs.com/writing-arm-assembly-part-1/",
+      "cost": "Free",
+      "d": "ARM assembly tutorials; 32-bit ARM only, pair with an AArch64 text.",
+      "c": "learn"
+    },
+    {
       "c": "learn",
       "n": "Reverse-Engineering tutorial",
       "u": "https://github.com/mytechnotalent/Reverse-Engineering",
@@ -847,6 +1086,14 @@
       "u": "https://github.com/guyinatuxedo/nightmare",
       "cost": "Free",
       "d": "Course built from annotated past CTF binaries using Ghidra, GEF and angr."
+    },
+    {
+      "n": "OWASP MASTG",
+      "u": "https://mas.owasp.org/MASTG/",
+      "r": "OWASP/mastg",
+      "cost": "Free",
+      "d": "The mobile app security testing guide, including Android and iOS reverse engineering.",
+      "c": "learn"
     },
     {
       "c": "learn",
@@ -884,11 +1131,18 @@
       "d": "Modern Binary Exploitation course; labs need older toolchains."
     },
     {
+      "n": "Reverse Engineering Stack Exchange",
+      "u": "https://reverseengineering.stackexchange.com/",
+      "cost": "Free",
+      "d": "Q&A for specific technical questions.",
+      "c": "learn"
+    },
+    {
       "c": "practice",
       "n": "picoGym",
       "u": "https://picoctf.org/",
       "cost": "Free",
-      "d": "CMU's year-round challenges with a gentle reversing category; nothing runs locally."
+      "d": "CMU's year-round challenges with a gentle reversing category; many run in the browser, some need a download (use the VM)."
     },
     {
       "c": "practice",
@@ -973,7 +1227,7 @@
       "n": "Cloudflare har-sanitizer",
       "u": "https://github.com/cloudflare/har-sanitizer",
       "why": "Archived Apr 2026",
-      "instead": "The `jq` filter in [Recipes](#-recipes)."
+      "instead": "A conservative jq redaction in [Recipes](README.md#-recipes), then a manual check."
     },
     {
       "n": "dex2jar",
@@ -981,5 +1235,6 @@
       "why": "No commits since Jul 2024",
       "instead": "JADX."
     }
-  ]
+  ],
+  "reviewed": "2026-10-10"
 }
