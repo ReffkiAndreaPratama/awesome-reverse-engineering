@@ -175,7 +175,9 @@ function statsSvg(stale, refreshed) {
 
 
 // Align markdown table pipes (awesome-lint table-pipe-alignment). Width counts emoji as 2 columns.
-const width = s => [...s.replace(/️/g, '')].reduce((w, ch) => w + (/\p{Extended_Pictographic}/u.test(ch) && ch.codePointAt(0) > 0xff ? 2 : 1), 0);
+// Explicit code-point ranges keep output identical across Node and ICU versions.
+const WIDE = new Set([0x25b6, 0x2601, 0x26a0, 0x26a1, 0x2b50]);
+const width = s => [...s.replace(/\ufe0f/g, '')].reduce((w, ch) => { const c = ch.codePointAt(0); return w + (c >= 0x1f000 || WIDE.has(c) ? 2 : 1); }, 0);
 function alignTables(md) {
   const lines = md.split('\n');
   const split = l => l.trim().replace(/^\||\|$/g, '').split(/(?<!\\)\|/).map(c => c.trim());
