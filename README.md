@@ -420,9 +420,6 @@ Reverse the stripped -O2 build, then check your answer against the source.
 | List | Description |
 |------|-------------|
 | [awesome-OSINT](https://github.com/edwardtay/awesome-OSINT) | Open-source intelligence tools, including threat intel and malware OSINT. |
-| [awesome-prompt-injection](https://github.com/edwardtay/awesome-prompt-injection) | Attacks and defences for LLM agents, relevant once agents read hostile binaries. |
-| [awesome-crypto-investigation](https://github.com/edwardtay/awesome-crypto-investigation) | On-chain tracing and exploit analysis. |
-| [awesome-drones](https://github.com/edwardtay/awesome-drones) | Drone firmware, flight controllers and security. |
 | [awesome-scrapers](https://github.com/edwardtay/awesome-scrapers) | Collection tooling for web data. |
 
 ## Contributing
