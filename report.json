@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-10",
+  "entries": 110,
+  "stale": [
+    {
+      "name": "Il2CppDumper",
+      "repo": "Perfare/Il2CppDumper",
+      "pushed": "2024-08-18",
+      "archived": false
+    },
+    {
+      "name": "Panoramix",
+      "repo": "palkeo/panoramix",
+      "pushed": "2024-08-04",
+      "archived": false
+    },
+    {
+      "name": "GhidraMCP",
+      "repo": "LaurieWired/GhidraMCP",
+      "pushed": "2025-06-23",
+      "archived": false
+    },
+    {
+      "name": "RPISEC MBE",
+      "repo": "RPISEC/MBE",
+      "pushed": "2021-12-09",
+      "archived": false
+    },
+    {
+      "name": "Damn Vulnerable DeFi",
+      "repo": "theredguild/damn-vulnerable-defi",
+      "pushed": "2025-03-21",
+      "archived": false
+    }
+  ]
+}

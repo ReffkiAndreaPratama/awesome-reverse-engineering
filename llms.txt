@@ -1,0 +1,166 @@
+# Awesome Reverse Engineering
+
+> Curated reverse engineering tools and learning resources with safety flags and live maintenance data. 110 entries, refreshed 2026-10-10.
+
+Flags: runs = runs target or third-party code (use an isolated VM); cloud = sends code to a third party; impersonated = use the official link only.
+
+## Identify & Triage
+
+- [Detect It Easy](https://github.com/horsicq/Detect-It-Easy): Identifies compiler, linker, packer and protector for PE, ELF and Mach-O files.
+- [capa](https://github.com/mandiant/capa): Names what a binary can do (encrypt, network, persist) from rules; points you to the functions that do it.
+- [FLOSS](https://github.com/mandiant/flare-floss): Extracts obfuscated and stack-built strings that plain `strings` misses.
+- [YARA-X](https://github.com/VirusTotal/yara-x): Rust successor to YARA for pattern-matching rules; turn findings into reusable detections.
+- [PE-bear](https://github.com/hasherezade/pe-bear): Fast PE header and section viewer for first looks at Windows binaries.
+- [XELFViewer](https://github.com/horsicq/XELFViewer): ELF header, section and segment viewer.
+- [checksec](https://github.com/slimm609/checksec): Reports RELRO, canaries, NX, PIE and FORTIFY; now written in Go (`checksec file <bin>`).
+
+## Disassemblers & Decompilers
+
+- [Ghidra](https://github.com/NationalSecurityAgency/ghidra): NSA's decompiler with scripting, BSim similarity search and a team server. Many 2026 advisories: stay on the latest release. Flags: impersonated.
+- [IDA Pro](https://hex-rays.com/): Industry standard. Free, Home and Pro Essential decompile in the cloud; never use cracked builds. Flags: cloud, impersonated.
+- [Binary Ninja](https://binary.ninja/): Layered intermediate languages that suit scripting; the free edition includes a local MCP server and debugger.
+- [radare2](https://github.com/radareorg/radare2): Scriptable command-line framework for quick triage and automation. Flags: runs.
+- [Rizin](https://github.com/rizinorg/rizin): radare2 fork focused on usability and a stable API.
+- [Cutter](https://github.com/rizinorg/cutter): Rizin GUI with the Ghidra decompiler built in.
+- [Hopper](https://www.hopperapp.com/): Affordable disassembler for macOS and Linux with strong Mach-O and Objective-C support.
+- [RetDec](https://github.com/avast/retdec): LLVM-based retargetable decompiler.
+- [Decompiler Explorer](https://github.com/decompiler-explorer/decompiler-explorer): Runs one small binary through many decompilers side by side (dogbolt.org). Uploads are kept and shared with tool authors. Flags: cloud.
+
+## Debuggers
+
+- [x64dbg](https://github.com/x64dbg/x64dbg): Open-source Windows user-mode debugger; plugins are native DLLs. Flags: runs.
+- [WinDbg](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/): Microsoft's debugger with Time Travel Debugging: record once, step backwards. Flags: runs.
+- [pwndbg](https://github.com/pwndbg/pwndbg): GDB and LLDB plugin with heap, memory and context views; keep GDB auto-load safe-path at its default. Flags: runs.
+- [GEF](https://github.com/hugsy/gef): Single-file GDB enhancement, handy for remote and embedded targets. Flags: runs.
+- [rr](https://github.com/rr-debugger/rr): Record and replay for Linux: debug the same execution as many times as you need. Flags: runs.
+- [Pernosco](https://pernos.co/): Omniscient debugging built on rr recordings; query any value at any point in time. Flags: cloud.
+- [edb](https://github.com/eteran/edb-debugger): x64dbg-style GUI debugger for Linux. Flags: runs.
+
+## Instrumentation & Emulation
+
+- [Frida](https://github.com/frida/frida): Inject JavaScript into running processes on every major platform. frida-server listens on the device: test devices only. Flags: runs.
+- [Unicorn](https://github.com/unicorn-engine/unicorn): CPU emulator for running a snippet (a decode loop) without running the program.
+- [Qiling](https://github.com/qilingframework/qiling): Whole-binary emulation with OS-level hooks; PyPI lags GitHub releases. Flags: runs.
+- [DynamoRIO](https://github.com/DynamoRIO/dynamorio): Dynamic binary instrumentation for tracing and coverage. Flags: runs.
+
+## Analysis Frameworks & Libraries
+
+- [angr](https://github.com/angr/angr): Symbolic execution and CFG recovery in Python; the standard for solving crackmes programmatically.
+- [angr management](https://github.com/angr/angr-management): GUI for angr.
+- [Triton](https://github.com/JonathanSalwan/Triton): Dynamic symbolic execution and taint analysis library.
+- [Miasm](https://github.com/cea-sec/miasm): Reverse engineering framework with IR, emulation and deobfuscation helpers.
+- [LIEF](https://github.com/lief-project/LIEF): Parse and modify ELF, PE, Mach-O, DEX and OAT from Python, C++ or Rust.
+- [Capstone](https://github.com/capstone-engine/capstone): Multi-architecture disassembly library; prefer the stable 5.x line.
+- [Keystone](https://github.com/keystone-engine/keystone): Multi-architecture assembler library, Capstone's counterpart.
+
+## Binary Diffing
+
+- [BinDiff](https://github.com/google/bindiff): Google's open-source binary diffing for IDA, Binary Ninja and Ghidra.
+- [BinExport](https://github.com/google/binexport): Exports disassembly for BinDiff from IDA, Binary Ninja and Ghidra.
+- [Diaphora](https://github.com/joxeankoret/diaphora): Advanced diffing inside IDA, including decompiler-level comparison.
+
+## Android & Java
+
+- [JADX](https://github.com/skylot/jadx): DEX to Java decompiler with GUI; static and safe to read.
+- [Apktool](https://github.com/iBotPeaches/Apktool): Decode and rebuild APK resources and smali; install rebuilt APKs only on an emulator.
+- [JEB](https://www.pnfsoftware.com/): Commercial decompiler that copes best with obfuscated Android code.
+- [Bytecode Viewer](https://github.com/Konloch/bytecode-viewer): Java and Android bytecode viewer with several decompilers side by side.
+- [objection](https://github.com/sensepost/objection): Frida-powered runtime exploration for mobile apps you are authorised to test. Flags: runs.
+- [MobSF](https://github.com/MobSF/Mobile-Security-Framework-MobSF): Automated static and dynamic mobile app audit; run the Docker image bound to localhost.
+
+## .NET
+
+- [ILSpy](https://github.com/icsharpcode/ILSpy): Static .NET decompiler; the safest way to read managed code. ilspy.org is not official. Flags: impersonated.
+- [dnSpyEx](https://github.com/dnSpyEx/dnSpy): Maintained dnSpy continuation with a debugger. dnspy.org and dnspy.net have served malware: GitHub releases only. Flags: runs, impersonated.
+
+## iOS & macOS
+
+- [ipsw](https://github.com/blacktop/ipsw): Swiss-army tool for IPSW, kernelcache, dyld_shared_cache and Mach-O analysis.
+- [Corellium](https://www.corellium.com/): Virtual Arm iOS and Android devices for research; owned by Cellebrite since Dec 2025. Flags: cloud.
+
+## Language Runtimes & Packagers
+
+- [GoReSym](https://github.com/mandiant/GoReSym): Go: recovers function names, types and build info from stripped binaries.
+- [blutter](https://github.com/worawit/blutter): Flutter: analyses Dart AOT snapshots in libapp.so.
+- [Il2CppDumper](https://github.com/Perfare/Il2CppDumper): Unity IL2CPP: restores class and method metadata.
+- [hermes-dec](https://github.com/P1sec/hermes-dec): React Native Hermes bytecode disassembler and decompiler.
+- [pyinstxtractor](https://github.com/extremecoders-re/pyinstxtractor): PyInstaller: extracts the bundled .pyc files.
+- [pycdc](https://github.com/zrax/pycdc): Python bytecode decompiler.
+- [GDRE Tools](https://github.com/GDRETools/gdsdecomp): Godot: recovers projects and decompiles GDScript.
+- [@electron/asar](https://github.com/electron/asar): Electron: extract app.asar to read the app's JavaScript; pin the version.
+- [WABT](https://github.com/WebAssembly/wabt): WebAssembly: wasm2wat, wasm-objdump and wasm-decompile to C-like pseudocode.
+
+## Web, JS & Protocols
+
+- [webcrack](https://github.com/j4k0xb/webcrack): Deobfuscates obfuscator.io output and unpacks webpack and browserify bundles. Flags: runs.
+- [mitmproxy](https://github.com/mitmproxy/mitmproxy): Intercepting HTTPS proxy for your own apps' traffic; keep its CA on test devices only.
+- [mitmproxy2swagger](https://github.com/alufers/mitmproxy2swagger): Turns captures into an OpenAPI spec; sanitize tokens first.
+- [Wireshark](https://www.wireshark.org/): Packet analysis; never run the GUI as root.
+
+## Firmware & Embedded
+
+- [unblob](https://github.com/onekey-sec/unblob): Recursive extraction of 78+ formats; runs as a normal user with traversal guards and a Landlock sandbox.
+- [binwalk](https://github.com/ReFirmLabs/binwalk): Signature scanning and entropy analysis (v3 is a Rust rewrite); never extract as root.
+- [EMBA](https://github.com/e-m-b-a/emba): Full firmware audit with emulation, SBOM and CVE report; uses sudo, dedicated VM only. Flags: runs.
+- [FACT](https://github.com/fkie-cad/FACT_core): Fraunhofer's firmware analysis and comparison platform.
+- [FirmAE](https://github.com/pr0v3rbs/FirmAE): Emulates router and IoT firmware for dynamic analysis. Flags: runs.
+- [dji-firmware-tools](https://github.com/o-gs/dji-firmware-tools): Parses DJI firmware packages; do not flash modified images to aircraft you fly.
+
+## Smart Contracts & EVM
+
+- [heimdall-rs](https://github.com/Jon-Becker/heimdall-rs): Decompile, disassemble and decode unverified contracts. Use release binaries; the default installer is curl to bash over HTTP.
+- [EVMole](https://github.com/cdump/evmole): Selectors, arguments, mutability and storage layout from bytecode; has an MCP server (pin its version).
+- [WhatsABI](https://github.com/shazow/whatsabi): Recovers ABIs and follows proxies to implementations.
+- [Panoramix](https://github.com/palkeo/panoramix): Python EVM decompiler; a second opinion.
+- [Dedaub](https://dedaub.com/): The most readable hosted decompilation; keep unreleased contracts out. Flags: cloud.
+- [Foundry cast](https://github.com/foundry-rs/foundry): `cast code`, `cast storage` on ERC-1967 slots and `cast 4byte` for read-only checks.
+- [evm.codes](https://www.evm.codes/): Interactive opcode reference and playground.
+
+## AI-Assisted RE & MCP Servers
+
+- [REA](https://github.com/morluto/rea): One MCP server over twelve target types (Ghidra, IDA, Hopper, JADX, Binwalk, browser, processes). Runtime capture runs targets as you with no sandbox; pin the version. Flags: runs.
+- [IDA MCP (official)](https://github.com/HexRaysSA/ida-mcp): Hex-Rays' own MCP server; attaches to a GUI database or a headless idalib worker.
+- [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp): Popular community server; py_eval, patch and debugger tools are high impact, leave them off. Flags: runs.
+- [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs): Headless IDA MCP server in Rust.
+- [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp): Actively maintained Ghidra server with 200+ tools including debugging. Flags: runs.
+- [GhidraMCP](https://github.com/LaurieWired/GhidraMCP): The original Ghidra MCP bridge; unauthenticated localhost HTTP.
+- [ReVa](https://github.com/cyberkaida/reverse-engineering-assistant): Ghidra MCP server with small, context-efficient tools; PyGhidra scripting is on by default. Flags: runs.
+- [Binary Ninja MCP](https://docs.binary.ninja/guide/mcp.html): Built into Binary Ninja, including the free edition.
+- [JADX AI MCP](https://github.com/zinja-coder/jadx-ai-mcp): JADX plugin exposing Android analysis to MCP clients.
+- [radare2 MCP](https://github.com/radareorg/radare2-mcp): stdio MCP server for radare2.
+- [r2ai](https://github.com/radareorg/r2ai): LLM-assisted decompilation (decai) and agent mode inside radare2. Flags: cloud.
+- [Gepetto](https://github.com/JusticeRage/Gepetto): IDA plugin that explains functions and renames variables; works with local models too. Flags: cloud.
+- [GhidrAssist](https://github.com/symgraph/GhidrAssist): LLM chat, RAG and agent mode inside Ghidra with local or hosted models. Flags: cloud.
+- [LLM4Decompile](https://github.com/albertan017/LLM4Decompile): Open decompilation models that run locally; 27 to 65% of functions re-execute correctly on its benchmark.
+
+## Lab & Isolation
+
+- [FLARE-VM](https://github.com/mandiant/flare-vm): Windows analysis VM build scripts; install only in a VM and switch to host-only after setup.
+- [REMnux](https://remnux.org/): Ubuntu-based analysis distro and appliance; check the published SHA-256.
+- [VMware Workstation Pro](https://blogs.vmware.com/cloud-foundation/2024/11/11/vmware-fusion-and-workstation-are-now-free-for-all-users/): Free for all users since Nov 2024; patch it and the guest tools.
+
+## Learn
+
+- [Compiler Explorer](https://github.com/compiler-explorer/compiler-explorer): See C and C++ become assembly across compilers and -O levels (godbolt.org).
+- [pwn.college](https://pwn.college/): ASU's hands-on dojos from Computing 101 to a full reversing course.
+- [OpenSecurityTraining2](https://p.ost2.fyi/): Arch1001 x86-64, Dbg1012 GDB, Dbg1102 Ghidra, RE3011 C++ binaries.
+- [Dive Into Systems](https://diveintosystems.org/): C, gdb, optimisation and assembly for x86-64 and ARM64 in one free book.
+- [Reverse-Engineering tutorial](https://github.com/mytechnotalent/Reverse-Engineering): Free tutorial covering x86, x64, ARM and AVR with worked examples.
+- [Nightmare](https://github.com/guyinatuxedo/nightmare): Course built from annotated past CTF binaries using Ghidra, GEF and angr.
+- [Practical Binary Analysis](https://nostarch.com/binaryanalysis): Formats, disassembly, instrumentation, taint and symbolic execution; concepts current, bundled VM dated (2018).
+- [The Ghidra Book, 2nd ed](https://nostarch.com/node/831): March 2026 edition with BSim, PyGhidra and the debugger.
+- [The Art of ARM Assembly, Vol 1](https://nostarch.com/art-arm-assembly-volume-1): Deep 64-bit ARM programming text (2025).
+- [Reverse Engineering for Beginners](https://beginners.re/): Large catalogue of compiled C patterns; leans on 32-bit x86 and older compilers.
+- [RPISEC MBE](https://github.com/RPISEC/MBE): Modern Binary Exploitation course; labs need older toolchains.
+
+## Practice Targets
+
+- [picoGym](https://picoctf.org/): CMU's year-round challenges with a gentle reversing category; nothing runs locally.
+- [Microcorruption](https://microcorruption.com/): MSP430 lock puzzles in a browser emulator.
+- [OverTheWire](https://overthewire.org/wargames/): Bandit, then Leviathan for reversing, over SSH.
+- [crackmes.one](https://crackmes.one/): Large reviewed crackme library with no-malware rules; VM only. Flags: runs.
+- [challenges.re](https://challenges.re/): Short multi-architecture exercises; no public write-ups.
+- [Root-Me Cracking](https://www.root-me.org/en/Challenges/Cracking): About 70 challenges across ELF, PE, .NET, APK, wasm and game engines. Flags: runs.
+- [Ethernaut](https://github.com/OpenZeppelin/ethernaut): EVM wargame including storage and bytecode levels; testnet-only key.
+- [Damn Vulnerable DeFi](https://github.com/theredguild/damn-vulnerable-defi): 18 local DeFi challenges on Foundry; run locally.
+- [Flare-On](https://flare-on.com/): Annual Windows reversing contest with official solutions back to 2014; Windows VM. Flags: runs.
