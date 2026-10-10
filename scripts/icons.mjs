@@ -1,0 +1,22 @@
+// Section icons on a 48x48 grid, stroke-drawn. Shared by build.mjs (README strips) and site.mjs (website).
+export const ICON = {
+  triage: '<path d="M10 6h18l8 8v28H10z"/><path d="M28 6v8h8"/><circle cx="26" cy="30" r="7"/><path d="M31 35l6 6"/>',
+  formats: '<rect x="6" y="8" width="36" height="32" rx="3"/><path d="M12 16h6M22 16h6M32 16h4M12 24h6M22 24h6M32 24h4M12 32h6M22 32h6"/>',
+  disasm: '<path d="M16 10l-9 14 9 14M32 10l9 14-9 14"/><path d="M27 8l-6 32"/>',
+  debug: '<ellipse cx="24" cy="27" rx="9" ry="12"/><path d="M24 15v24M15 22H7M15 30H7M33 22h8M33 30h8M17 18l-5-6M31 18l5-6"/><circle cx="24" cy="12" r="4"/>',
+  instr: '<path d="M30 6v16a9 9 0 0 1-18 0v-4"/><path d="M8 20l4-4 4 4"/><circle cx="30" cy="6" r="2"/><path d="M18 40h20M28 34v12"/>',
+  memory: '<rect x="8" y="10" width="32" height="28" rx="3"/><path d="M8 18h32M14 24h4M14 30h4M22 24h12M22 30h8"/><path d="M14 6v4M24 6v4M34 6v4M14 38v4M24 38v4M34 38v4"/>',
+  frameworks: '<circle cx="12" cy="12" r="5"/><circle cx="36" cy="12" r="5"/><circle cx="24" cy="36" r="5"/><circle cx="24" cy="22" r="3"/><path d="M16 15l6 5M32 15l-6 5M24 25v6"/>',
+  diff: '<rect x="6" y="8" width="14" height="32" rx="2"/><rect x="28" y="8" width="14" height="32" rx="2"/><path d="M10 16h6M10 22h6M32 16h6M32 28h6M20 22h8M25 19l3 3-3 3"/>',
+  android: '<rect x="12" y="20" width="24" height="18" rx="3"/><path d="M12 18a12 10 0 0 1 24 0z"/><circle cx="19" cy="13" r="1.5"/><circle cx="29" cy="13" r="1.5"/><path d="M16 6l3 4M32 6l-3 4M18 38v5M30 38v5"/>',
+  dotnet: '<rect x="6" y="10" width="36" height="28" rx="4"/><path d="M13 30V18l8 12V18"/><circle cx="27" cy="29" r="1.5"/><path d="M33 18h6M36 18v12"/>',
+  apple: '<rect x="8" y="10" width="22" height="16" rx="2"/><path d="M4 30h30"/><rect x="32" y="16" width="12" height="24" rx="3"/><path d="M36 36h4"/>',
+  runtimes: '<path d="M24 6l16 8v20l-16 8-16-8V14z"/><path d="M8 14l16 8 16-8M24 22v20"/>',
+  web: '<circle cx="24" cy="24" r="17"/><path d="M7 24h34M24 7c-6 6-6 28 0 34M24 7c6 6 6 28 0 34"/>',
+  firmware: '<rect x="13" y="13" width="22" height="22" rx="3"/><rect x="19" y="19" width="10" height="10"/><path d="M18 6v7M24 6v7M30 6v7M18 35v7M24 35v7M30 35v7M6 18h7M6 24h7M6 30h7M35 18h7M35 24h7M35 30h7"/>',
+  evm: '<rect x="6" y="18" width="13" height="13" rx="2"/><rect x="29" y="18" width="13" height="13" rx="2"/><path d="M19 24h10"/><path d="M12 18v-6h24v6M12 31v6h24v-6"/>',
+  ai: '<rect x="12" y="12" width="24" height="24" rx="4"/><path d="M19 6v6M29 6v6M19 36v6M29 36v6M6 19h6M6 29h6M36 19h6M36 29h6"/><path d="M24 17l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>',
+  lab: '<path d="M18 6h12M20 6v12L9 38a3 3 0 0 0 3 4h24a3 3 0 0 0 3-4L28 18V6"/><path d="M13 30h22"/>',
+  learn: '<path d="M24 12c-5-4-12-4-18-2v28c6-2 13-2 18 2 5-4 12-4 18-2V10c-6-2-13-2-18 2z"/><path d="M24 12v28"/>',
+  practice: '<circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="3"/><path d="M33 15l8-8M36 7h5v5"/>',
+};

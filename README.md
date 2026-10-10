@@ -4,7 +4,7 @@
 
 > Tools and learning resources for understanding software you did not write: native binaries, Android and .NET apps, language runtimes, web apps, firmware and smart contracts. Every entry is reviewed for execution and disclosure risk, and maintenance status refreshes weekly from GitHub.
 
-**135 entries · 19 categories · reviewed 2026-10-10 · GitHub data 2026-10-10**
+**135 entries · 19 categories · reviewed 2026-10-10 · GitHub data 2026-10-10 · [Browse and search the website](https://edwardtay.github.io/awesome-reverse-engineering/)**
 
 ## Contents
 
