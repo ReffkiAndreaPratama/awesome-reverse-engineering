@@ -58,6 +58,19 @@ function row(e, stale) {
   return `| [${e.n}](${e.u}) | ${fmtStars(m.stars)} | ${updated} | ${e.cost} | ${[flags, warn ? '⚠️' : ''].filter(Boolean).join(' ')} | ${e.d} |`;
 }
 
+
+function statsSvg(stale) {
+  const rows = data.categories.map(c => ({ t: c.title.replace(/^\S+\s/, ''), n: data.entries.filter(e => e.c === c.id).length }));
+  const max = Math.max(...rows.map(r => r.n));
+  const H = 44 + rows.length * 26 + 16, W = 880, X = 250, BW = 520;
+  const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const bars = rows.map((r, i) => {
+    const y = 44 + i * 26, w = Math.max(6, Math.round((r.n / max) * BW));
+    return `<text x="${X - 12}" y="${y + 14}" text-anchor="end" class="l">${esc(r.t)}</text><rect x="${X}" y="${y + 2}" width="${w}" height="16" rx="4" fill="url(#g)"/><text x="${X + w + 8}" y="${y + 15}" class="n">${r.n}</text>`;
+  }).join('');
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Entries per category"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#4338ca"/><stop offset="1" stop-color="#7c3aed"/></linearGradient><style>.l{font:13px Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#374151}.n{font:600 12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#4338ca}.h{font:700 14px Inter,-apple-system,Segoe UI,Helvetica,Arial,sans-serif;fill:#111827}.s{font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;fill:#6b7280}</style></defs><rect width="${W}" height="${H}" rx="14" fill="#fbfbff" stroke="#e0e7ff"/><text x="24" y="28" class="h">${data.entries.length} entries across ${rows.length} categories</text><text x="${W - 24}" y="28" text-anchor="end" class="s">refreshed ${TODAY} · ${stale.length} flagged ⚠</text>${bars}</svg>\n`;
+}
+
 async function main() {
   if (!OFFLINE) await refresh();
   const stale = [];
@@ -87,6 +100,8 @@ async function main() {
     ...data.categories.flatMap(c => [`## ${c.title.replace(/^\S+\s/, '')}`, '', ...data.entries.filter(e => e.c === c.id).map(e => `- [${e.n}](${e.u}): ${e.d}${e.f ? ` Flags: ${e.f.join(', ')}.` : ''}`), '']),
   ].join('\n');
   writeFileSync(join(ROOT, 'llms.txt'), llms);
+  mkdirSync(join(ROOT, 'assets'), { recursive: true });
+  writeFileSync(join(ROOT, 'assets', 'stats.svg'), statsSvg(stale));
   writeFileSync(join(ROOT, 'report.json'), JSON.stringify({ date: TODAY, entries: data.entries.length, stale }, null, 2) + '\n');
   console.log(`README: ${data.entries.length} entries, ${stale.length} flagged`);
 }

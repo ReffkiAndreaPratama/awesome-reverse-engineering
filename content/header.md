@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/banner.svg" alt="Awesome Reverse Engineering: binaries, apps, firmware and smart contracts, with live data and a safety flag on every tool" width="100%"></p>
+
 # Awesome Reverse Engineering [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
 [![Refresh](https://img.shields.io/github/actions/workflow/status/edwardtay/awesome-reverse-engineering/refresh.yml?label=weekly%20refresh)](https://github.com/edwardtay/awesome-reverse-engineering/actions/workflows/refresh.yml)
@@ -9,6 +11,8 @@
 > Reverse engineering tools and learning resources for binaries, apps, firmware and smart contracts, with live maintenance data, a safety flag on every entry, and the agent-era tooling (MCP servers, AI decompilers) alongside the classics.
 
 **{{COUNT}} entries · refreshed {{DATE}} · {{STALE}} flagged for maintenance**
+
+<p align="center"><img src="assets/stats.svg" alt="Entries per category, regenerated weekly" width="88%"></p>
 
 ## What makes this list different
 
