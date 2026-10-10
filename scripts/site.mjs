@@ -84,8 +84,8 @@ function page({ path, title, description, body, jsonld = [], ogType = 'website' 
 <meta name="description" content="${h(description)}">
 <link rel="canonical" href="${url}">
 <meta name="author" content="Edward Tay">
-<meta property="og:type" content="${ogType}"><meta property="og:title" content="${h(title)}"><meta property="og:description" content="${h(description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${BASE}/assets/social-preview.png">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${BASE}/assets/social-preview.png">
+<meta property="og:type" content="${ogType}"><meta property="og:title" content="${h(title)}"><meta property="og:description" content="${h(description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${BASE}/assets/social-preview.jpg">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${BASE}/assets/social-preview.jpg">
 <link rel="alternate" type="text/plain" title="llms.txt" href="${rel}llms.txt">
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><rect width="48" height="48" rx="12" fill="#4338ca"/><path d="M16 14l-7 10 7 10M32 14l7 10-7 10M27 12l-6 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg>`)}">
 <style>${CSS}</style>
@@ -129,7 +129,7 @@ function build() {
       { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Reverse engineering tool categories', itemListElement: cats.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, url: `${BASE}/c/${c.id}/` })) },
     ],
     body: `
-<section class="hero"><img src="assets/banner.svg" alt="Awesome Reverse Engineering" width="1280" height="420"></section>
+<section class="hero"><img src="assets/banner.webp" alt="Awesome Reverse Engineering: binaries, Android, .NET, firmware and smart contracts" width="1600" height="560"></section>
 <h1>Reverse engineering tools, reviewed for safety</h1>
 <p class="lede">${data.entries.length} tools and resources for understanding software you did not write: native binaries, Android and .NET apps, language runtimes, web apps, firmware and smart contracts. Every entry is flagged for execution and disclosure risk, and maintenance data refreshes weekly.</p>
 <div class="stats"><div class="stat"><b>${data.entries.length}</b><span>entries</span></div><div class="stat"><b>${cats.length}</b><span>categories</span></div><div class="stat"><b>${flagged}</b><span>with a safety flag</span></div><div class="stat"><b>${REFRESHED}</b><span>last GitHub refresh</span></div></div>
