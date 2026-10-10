@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/banner.webp" alt="Awesome Reverse Engineering: binaries, Android, .NET, firmware and smart contracts, with a safety flag on every tool" width="100%"></p>
+![Awesome Reverse Engineering: binaries, Android, .NET, firmware and smart contracts, with a safety flag on every tool](assets/banner.webp)
 
 # Awesome Reverse Engineering [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
 
