@@ -1,6 +1,6 @@
 {
   "reviewed": "2026-10-10",
-  "refreshed": "2026-10-10",
+  "refreshed": "2026-10-12",
   "entries": 135,
   "flaggedForSafety": 51,
   "maintenance": [
@@ -18,11 +18,6 @@
       "name": "Panoramix",
       "repo": "palkeo/panoramix",
       "note": "No push since 2024-08-04"
-    },
-    {
-      "name": "GhidraMCP",
-      "repo": "LaurieWired/GhidraMCP",
-      "note": "No push since 2025-06-23"
     },
     {
       "name": "RPISEC MBE",

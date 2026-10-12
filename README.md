@@ -4,7 +4,7 @@
 
 > Tools and learning resources for understanding software you did not write: native binaries, Android and .NET apps, language runtimes, web apps, firmware and smart contracts. Every entry is reviewed for execution and disclosure risk, and maintenance status refreshes weekly from GitHub.
 
-**135 entries · 19 categories · reviewed 2026-10-10 · GitHub data 2026-10-10 · [Browse and search the website](https://edwardtay.github.io/awesome-reverse-engineering/)**
+**135 entries · 19 categories · reviewed 2026-10-10 · GitHub data 2026-10-12 · [Browse and search the website](https://edwardtay.github.io/awesome-reverse-engineering/)**
 
 ## Contents
 
@@ -140,11 +140,11 @@ The engines everything else plugs into.
 
 | Tool                                            | Last push · Stars | Cost             | Flags    | Use it when                                                                                                                  |
 | ----------------------------------------------- | ----------------- | ---------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [Ghidra](https://ghidra-sre.org/)               | 2026-10 · ★ 82k   | Free             | 🎭 ▶️    | NSA's decompiler with scripting, BSim similarity search and a team server. Many 2026 advisories: stay on the latest release. |
+| [Ghidra](https://ghidra-sre.org/)               | 2026-10 · ★ 84k   | Free             | 🎭 ▶️    | NSA's decompiler with scripting, BSim similarity search and a team server. Many 2026 advisories: stay on the latest release. |
 | [IDA Pro](https://hex-rays.com/)                | website           | Paid · Free tier | ☁️ 🎭 ▶️ | Industry standard. Free, Home and Pro Essential decompile in the cloud; never use cracked builds.                            |
 | [Binary Ninja](https://binary.ninja/)           | website           | Paid · Free tier | ▶️       | Layered intermediate languages that suit scripting; the free edition includes a local MCP server and debugger.               |
 | [radare2](https://github.com/radareorg/radare2) | 2026-10 · ★ 25k   | Free             | ▶️       | Scriptable command-line framework for quick triage and automation.                                                           |
-| [Rizin](https://github.com/rizinorg/rizin)      | 2026-10 · ★ 3.9k  | Free             | ▶️       | radare2 fork focused on usability and a stable API.                                                                          |
+| [Rizin](https://github.com/rizinorg/rizin)      | 2026-10 · ★ 4k    | Free             | ▶️       | radare2 fork focused on usability and a stable API.                                                                          |
 | [Cutter](https://github.com/rizinorg/cutter)    | 2026-09 · ★ 20k   | Free             | ▶️       | Rizin GUI with the Ghidra decompiler built in.                                                                               |
 | [Hopper](https://www.hopperapp.com/)            | website           | Paid             | ▶️       | Affordable disassembler for macOS and Linux with strong Mach-O and Objective-C support.                                      |
 | [RetDec](https://github.com/avast/retdec)       | 2026-05 · ★ 8.6k  | Free             | ⚠️       | LLVM-based retargetable decompiler. ⚠️ Limited maintenance mode, per its README.                                             |
@@ -201,7 +201,7 @@ Inspect a live process or an offline memory image.
 | Tool                                                                | Last push · Stars | Cost | Flags | Use it when                                                                             |
 | ------------------------------------------------------------------- | ----------------- | ---- | ----- | --------------------------------------------------------------------------------------- |
 | [Sysinternals](https://learn.microsoft.com/en-us/sysinternals/)     | website           | Free |       | Process Explorer, Process Monitor and friends for watching what a Windows program does. |
-| [Volatility 3](https://github.com/volatilityfoundation/volatility3) | 2026-09 · ★ 4.5k  | Free |       | Offline memory image analysis: processes, modules, handles, network.                    |
+| [Volatility 3](https://github.com/volatilityfoundation/volatility3) | 2026-10 · ★ 4.5k  | Free |       | Offline memory image analysis: processes, modules, handles, network.                    |
 | [PE-sieve](https://github.com/hasherezade/pe-sieve)                 | 2026-06 · ★ 3.9k  | Free | ▶️    | Scans a running process for implants, hooks and in-memory patches and dumps them.       |
 
 
@@ -217,11 +217,11 @@ Build your own analysis: parsing, disassembly, symbolic execution.
 | ---------------------------------------------------------- | ----------------- | ---- | ----- | -------------------------------------------------------------------------------------------------- |
 | [angr](https://github.com/angr/angr)                       | 2026-10 · ★ 9.1k  | Free | ▶️    | Symbolic execution and CFG recovery in Python; the standard for solving crackmes programmatically. |
 | [angr management](https://github.com/angr/angr-management) | 2026-10 · ★ 1.2k  | Free | ▶️    | GUI for angr.                                                                                      |
-| [Triton](https://github.com/JonathanSalwan/Triton)         | 2026-09 · ★ 4.3k  | Free | ▶️    | Dynamic symbolic execution and taint analysis library.                                             |
+| [Triton](https://github.com/JonathanSalwan/Triton)         | 2026-10 · ★ 4.3k  | Free | ▶️    | Dynamic symbolic execution and taint analysis library.                                             |
 | [Miasm](https://github.com/cea-sec/miasm)                  | 2026-09 · ★ 4k    | Free | ▶️    | Reverse engineering framework with IR, emulation and deobfuscation helpers.                        |
 | [LIEF](https://github.com/lief-project/LIEF)               | 2026-10 · ★ 5.6k  | Free |       | Parse and modify ELF, PE, Mach-O, DEX and OAT from Python, C++ or Rust.                            |
 | [Capstone](https://github.com/capstone-engine/capstone)    | 2026-10 · ★ 9.1k  | Free |       | Multi-architecture disassembly library; prefer the stable 5.x line.                                |
-| [Keystone](https://github.com/keystone-engine/keystone)    | 2026-07 · ★ 2.6k  | Free |       | Multi-architecture assembler library, Capstone's counterpart.                                      |
+| [Keystone](https://github.com/keystone-engine/keystone)    | 2026-10 · ★ 2.6k  | Free |       | Multi-architecture assembler library, Capstone's counterpart.                                      |
 
 
 <p align="right">(<a href="#contents">back to top</a>)</p>
@@ -236,7 +236,7 @@ Compare two builds to find a feature or a fix fast.
 | --------------------------------------------------- | ----------------- | ---- | ----- | --------------------------------------------------------------------- |
 | [BinDiff](https://github.com/google/bindiff)        | 2026-09 · ★ 3.2k  | Free |       | Google's open-source binary diffing for IDA, Binary Ninja and Ghidra. |
 | [BinExport](https://github.com/google/binexport)    | 2026-10 · ★ 1.2k  | Free |       | Exports disassembly for BinDiff from IDA, Binary Ninja and Ghidra.    |
-| [Diaphora](https://github.com/joxeankoret/diaphora) | 2026-09 · ★ 4.4k  | Free |       | Advanced diffing inside IDA, including decompiler-level comparison.   |
+| [Diaphora](https://github.com/joxeankoret/diaphora) | 2026-10 · ★ 4.4k  | Free |       | Advanced diffing inside IDA, including decompiler-level comparison.   |
 
 
 <p align="right">(<a href="#contents">back to top</a>)</p>
@@ -269,7 +269,7 @@ Managed code decompiles close to source.
 
 | Tool                                          | Last push · Stars | Cost | Flags | Use it when                                                                                                       |
 | --------------------------------------------- | ----------------- | ---- | ----- | ----------------------------------------------------------------------------------------------------------------- |
-| [ILSpy](https://github.com/icsharpcode/ILSpy) | 2026-10 · ★ 26k   | Free | 🎭    | Static .NET decompiler for reading managed code without running it. ilspy.org is not official.                    |
+| [ILSpy](https://github.com/icsharpcode/ILSpy) | 2026-10 · ★ 27k   | Free | 🎭    | Static .NET decompiler for reading managed code without running it. ilspy.org is not official.                    |
 | [dnSpyEx](https://github.com/dnSpyEx/dnSpy)   | 2026-08 · ★ 11k   | Free | ▶️ 🎭 | Maintained dnSpy continuation with a debugger. dnspy.org and dnspy.net have served malware: GitHub releases only. |
 
 
@@ -305,8 +305,8 @@ The runtime decides the tool. Check this table before opening a disassembler.
 | [pycdc](https://github.com/zrax/pycdc)                               | 2026-04 · ★ 4.6k  | Free |       | Python bytecode decompiler.                                                                            |
 | [GDRE Tools](https://github.com/GDRETools/gdsdecomp)                 | 2026-10 · ★ 4.3k  | Free |       | Godot: recovers projects and decompiles GDScript.                                                      |
 | [@electron/asar](https://github.com/electron/asar)                   | 2026-10 · ★ 2.9k  | Free |       | Electron: extract app.asar to read the app's JavaScript; pin the version.                              |
-| [WABT](https://github.com/WebAssembly/wabt)                          | 2026-10 · ★ 8.1k  | Free |       | WebAssembly: wasm2wat, wasm-objdump and wasm-decompile to C-like pseudocode.                           |
-| [Cpp2IL](https://github.com/SamboyCoding/Cpp2IL)                     | 2026-09 · ★ 2.9k  | Free |       | Unity IL2CPP to IL recovery; work in progress, check supported Unity versions, use on your own builds. |
+| [WABT](https://github.com/WebAssembly/wabt)                          | 2026-10 · ★ 8.2k  | Free |       | WebAssembly: wasm2wat, wasm-objdump and wasm-decompile to C-like pseudocode.                           |
+| [Cpp2IL](https://github.com/SamboyCoding/Cpp2IL)                     | 2026-09 · ★ 3k    | Free |       | Unity IL2CPP to IL recovery; work in progress, check supported Unity versions, use on your own builds. |
 
 
 <p align="right">(<a href="#contents">back to top</a>)</p>
@@ -342,11 +342,11 @@ Extraction, emulation and audit of device images you own.
 | [binwalk](https://github.com/ReFirmLabs/binwalk)                 | 2026-08 · ★ 14k   | Free        |       | Signature scanning and entropy analysis (v3 is a Rust rewrite); never extract as root.                   |
 | [EMBA](https://github.com/e-m-b-a/emba)                          | 2026-10 · ★ 3.7k  | Free        | ▶️    | Full firmware audit with emulation, SBOM and CVE report; uses sudo, dedicated VM only.                   |
 | [FACT](https://github.com/fkie-cad/FACT_core)                    | 2026-10 · ★ 1.5k  | Free        |       | Fraunhofer's firmware analysis and comparison platform.                                                  |
-| [FirmAE](https://github.com/pr0v3rbs/FirmAE)                     | 2026-06 · ★ 945   | Free        | ▶️    | Emulates router and IoT firmware for dynamic analysis.                                                   |
+| [FirmAE](https://github.com/pr0v3rbs/FirmAE)                     | 2026-06 · ★ 947   | Free        | ▶️    | Emulates router and IoT firmware for dynamic analysis.                                                   |
 | [dji-firmware-tools](https://github.com/o-gs/dji-firmware-tools) | 2026-07 · ★ 2.2k  | Free        |       | Parses DJI firmware packages; do not flash modified images to aircraft you fly.                          |
 | [UEFITool](https://github.com/LongSoft/UEFITool)                 | 2026-07 · ★ 5.7k  | Free        |       | Parses and extracts UEFI firmware images.                                                                |
 | [OFRAK](https://github.com/redballoonsecurity/ofrak)             | 2026-08 · ★ 2.1k  | Free · Paid |       | Unpack, analyse, modify and repack firmware in one framework.                                            |
-| [OpenOCD](https://openocd.org/)                                  | 2026-10 · ★ 2.3k  | Free        | ▶️    | On-chip debugging over JTAG and SWD for hardware you own.                                                |
+| [OpenOCD](https://openocd.org/)                                  | 2026-10 · ★ 2.4k  | Free        | ▶️    | On-chip debugging over JTAG and SWD for hardware you own.                                                |
 | [sigrok](https://sigrok.org/)                                    | website           | Free        |       | Logic analyser software and protocol decoders for UART, SPI, I2C and more.                               |
 
 
@@ -379,19 +379,19 @@ Agents and plugins driving the engines above, grouped by engine. Treat every mod
 
 | Tool                                                                | Last push · Stars | Cost             | Flags | Use it when                                                                                                                                                             |
 | ------------------------------------------------------------------- | ----------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [REA](https://github.com/morluto/rea)                               | 2026-10 · ★ 49k   | Free             | ▶️    | One MCP server over twelve target types (Ghidra, IDA, Hopper, JADX, Binwalk, browser, processes). Runtime capture runs targets as you with no sandbox; pin the version. |
-| [IDA MCP (official)](https://github.com/HexRaysSA/ida-mcp)          | 2026-10 · ★ 896   | Needs IDA Pro    |       | Hex-Rays' own server over stdio or Streamable HTTP; needs IDA 9.4+ with idalib and Python 3.11+.                                                                        |
+| [REA](https://github.com/morluto/rea)                               | 2026-10 · ★ 138k  | Free             | ▶️    | One MCP server over twelve target types (Ghidra, IDA, Hopper, JADX, Binwalk, browser, processes). Runtime capture runs targets as you with no sandbox; pin the version. |
+| [IDA MCP (official)](https://github.com/HexRaysSA/ida-mcp)          | 2026-10 · ★ 1k    | Needs IDA Pro    |       | Hex-Rays' own server over stdio or Streamable HTTP; needs IDA 9.4+ with idalib and Python 3.11+.                                                                        |
 | [IDA Pro MCP](https://github.com/mrexodia/ida-pro-mcp)              | 2026-09 · ★ 13k   | Needs IDA Pro    | ▶️    | Popular community server; py_eval, patch and debugger tools are high impact, leave them off.                                                                            |
-| [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                | 2026-10 · ★ 857   | Needs IDA Pro    |       | Headless IDA MCP server in Rust.                                                                                                                                        |
-| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp)       | 2026-10 · ★ 5.2k  | Free             | ▶️    | Actively maintained Ghidra server with 200+ tools including debugging.                                                                                                  |
-| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP)               | 2025-06 · ★ 11k   | Free             | ⚠️    | The original Ghidra MCP bridge; unauthenticated localhost HTTP.                                                                                                         |
-| [ReVa](https://github.com/cyberkaida/reverse-engineering-assistant) | 2026-10 · ★ 859   | Free             | ▶️    | Ghidra MCP server with small, context-efficient tools; PyGhidra scripting is on by default.                                                                             |
+| [ida-mcp-rs](https://github.com/blacktop/ida-mcp-rs)                | 2026-10 · ★ 864   | Needs IDA Pro    |       | Headless IDA MCP server in Rust.                                                                                                                                        |
+| [Ghidra MCP Server](https://github.com/bethington/ghidra-mcp)       | 2026-10 · ★ 5.5k  | Free             | ▶️    | Actively maintained Ghidra server with 200+ tools including debugging.                                                                                                  |
+| [GhidraMCP](https://github.com/LaurieWired/GhidraMCP)               | 2026-10 · ★ 11k   | Free             |       | The original Ghidra MCP bridge; unauthenticated localhost HTTP.                                                                                                         |
+| [ReVa](https://github.com/cyberkaida/reverse-engineering-assistant) | 2026-10 · ★ 869   | Free             | ▶️    | Ghidra MCP server with small, context-efficient tools; PyGhidra scripting is on by default.                                                                             |
 | [Binary Ninja MCP](https://docs.binary.ninja/guide/mcp.html)        | website           | Free tier · Paid |       | Built into Binary Ninja; the GUI server works in every edition, headless needs Commercial or Ultimate.                                                                  |
 | [JADX AI MCP](https://github.com/zinja-coder/jadx-ai-mcp)           | 2026-09 · ★ 2.9k  | Free             |       | JADX plugin exposing Android analysis to MCP clients.                                                                                                                   |
-| [radare2 MCP](https://github.com/radareorg/radare2-mcp)             | 2026-10 · ★ 318   | Free             |       | stdio MCP server for radare2.                                                                                                                                           |
-| [r2ai](https://github.com/radareorg/r2ai)                           | 2026-10 · ★ 486   | Free             | ☁️    | LLM-assisted decompilation (decai) and agent mode inside radare2.                                                                                                       |
+| [radare2 MCP](https://github.com/radareorg/radare2-mcp)             | 2026-10 · ★ 321   | Free             |       | stdio MCP server for radare2.                                                                                                                                           |
+| [r2ai](https://github.com/radareorg/r2ai)                           | 2026-10 · ★ 487   | Free             | ☁️    | LLM-assisted decompilation (decai) and agent mode inside radare2.                                                                                                       |
 | [Gepetto](https://github.com/JusticeRage/Gepetto)                   | 2026-08 · ★ 3.5k  | Free             | ☁️    | IDA plugin that explains functions and renames variables; sends code to the chosen provider unless you configure a local model.                                         |
-| [GhidrAssist](https://github.com/symgraph/GhidrAssist)              | 2026-09 · ★ 753   | Free             | ☁️    | LLM chat, RAG and agent mode inside Ghidra; hosted or local models.                                                                                                     |
+| [GhidrAssist](https://github.com/symgraph/GhidrAssist)              | 2026-09 · ★ 756   | Free             | ☁️    | LLM chat, RAG and agent mode inside Ghidra; hosted or local models.                                                                                                     |
 | [LLM4Decompile](https://github.com/albertan017/LLM4Decompile)       | 2026-02 · ★ 7.1k  | Free             |       | Open decompilation models that run locally; 27 to 65% of functions re-execute correctly on its benchmark.                                                               |
 
 **MCP servers at a glance** (from each project's README, 2026-10-10)
@@ -436,7 +436,7 @@ Courses, books and references, in roughly the order to use them.
 | [OpenSecurityTraining2](https://p.ost2.fyi/)                                          | website           | Free               |       | Arch1001 x86-64, Dbg1012 GDB, Dbg1102 Ghidra, RE3011 C++ binaries.                                                               |
 | [Dive Into Systems](https://diveintosystems.org/)                                     | website           | Free               |       | C, gdb, optimisation and assembly for x86-64 and ARM64 in one free book.                                                         |
 | [Azeria Labs](https://azeria-labs.com/writing-arm-assembly-part-1/)                   | website           | Free               |       | ARM assembly tutorials; 32-bit ARM only, pair with an AArch64 text.                                                              |
-| [Reverse-Engineering tutorial](https://github.com/mytechnotalent/Reverse-Engineering) | 2026-10 · ★ 14k   | Free               |       | Free tutorial covering x86, x64, ARM and AVR with worked examples.                                                               |
+| [Reverse-Engineering tutorial](https://github.com/mytechnotalent/Reverse-Engineering) | 2026-10 · ★ 15k   | Free               |       | Free tutorial covering x86, x64, ARM and AVR with worked examples.                                                               |
 | [Nightmare](https://github.com/guyinatuxedo/nightmare)                                | 2026-02 · ★ 3.2k  | Free               |       | Course built from annotated past CTF binaries using Ghidra, GEF and angr.                                                        |
 | [OWASP MASTG](https://mas.owasp.org/MASTG/)                                           | 2026-10 · ★ 13k   | Free               |       | The mobile app security testing guide, including Android and iOS reverse engineering.                                            |
 | [Practical Binary Analysis](https://nostarch.com/binaryanalysis)                      | website           | Paid               |       | Formats, disassembly, instrumentation, taint and symbolic execution; concepts current, bundled VM dated (2018).                  |
@@ -515,7 +515,7 @@ Reverse the stripped -O2 build, then check your answer against the source.
 ## 📈 About This List
 
 - **Maintenance data.** Last push, stars and archive status refresh weekly from the GitHub API. A refresh that fails for more than a fifth of repositories fails CI and keeps the previous data, so the date shown is the last successful refresh.
-- **Editorial review.** Flags, costs and descriptions were last reviewed on 2026-10-10. 51 entries carry a safety flag; 6 carry a maintenance warning. Changes are logged in [CHANGELOG.md](CHANGELOG.md).
+- **Editorial review.** Flags, costs and descriptions were last reviewed on 2026-10-10. 51 entries carry a safety flag; 5 carry a maintenance warning. Changes are logged in [CHANGELOG.md](CHANGELOG.md).
 - **Graveyard.** Archived and replaced tools live in [GRAVEYARD.md](GRAVEYARD.md).
 - **Machine-readable.** [`data.json`](data.json) is the source; [`llms.txt`](llms.txt) and [`report.json`](report.json) carry the same entries with flags and maintenance state.
 
