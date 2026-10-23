@@ -517,7 +517,8 @@ Reverse the stripped -O2 build, then check your answer against the source.
 - **Maintenance data.** Last push, stars and archive status refresh weekly from the GitHub API. A refresh that fails for more than a fifth of repositories fails CI and keeps the previous data, so the date shown is the last successful refresh.
 - **Editorial review.** Flags, costs and descriptions were last reviewed on 2026-10-10. 51 entries carry a safety flag; 5 carry a maintenance warning. Changes are logged in [CHANGELOG.md](CHANGELOG.md).
 - **Graveyard.** Archived and replaced tools live in [GRAVEYARD.md](GRAVEYARD.md).
-- **Machine-readable.** [`data.json`](data.json) is the source; [`llms.txt`](llms.txt) and [`report.json`](report.json) carry the same entries with flags and maintenance state.
+- **Machine-readable.** [`data.json`](data.json) is the source; [`llms.txt`](llms.txt) and [`report.json`](report.json) carry the same entries with flags and maintenance state. The website also publishes a static JSON API under `api/`; see [docs/API.md](docs/API.md).
+- **For agents and scripts.** `node scripts/mcp.mjs` serves the catalogue over MCP (search, lookup, toolchain advice and safety guidance). `node scripts/triage.mjs <file>` identifies a sample's runtime and prints the recommended toolchain without executing it. See [docs/MCP.md](docs/MCP.md) and [docs/TRIAGE.md](docs/TRIAGE.md).
 
 <p align="center"><img src="assets/stats.svg" alt="Entries per category" width="88%"></p>
 
