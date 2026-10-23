@@ -29,3 +29,17 @@ Tools whose main purpose is cracking licences, bypassing DRM, cheating in online
 ## Style
 
 One sentence per description, ending with a period, saying when the tool is the right choice. No em dashes.
+
+## Checks
+
+Run these before opening a pull request. Node 22 or newer, no dependencies to install.
+
+```bash
+node scripts/build.mjs --offline   # regenerate README.md, GRAVEYARD.md, llms.txt, report.json and SVGs
+node scripts/build.mjs --check     # validate data against the editorial rules and generated files
+node --test scripts/test.mjs       # schema, API, triage and MCP tests
+node scripts/site.mjs              # build _site/ including the JSON API
+```
+
+The published schema is [`schema/data.schema.json`](schema/data.schema.json). Optional
+entry fields: `t` tags, `p` platforms, `lic` licence and `evidence` links for a flag.

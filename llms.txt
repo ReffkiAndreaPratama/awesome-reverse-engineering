@@ -2,6 +2,8 @@
 
 > Curated reverse engineering tools and learning resources with safety flags and maintenance data. 135 entries. Entries reviewed 2026-10-10; GitHub data refreshed 2026-10-19.
 
+Machine-readable: the website publishes a static JSON API under api/ (api/index.json, api/entries.json, api/search-index.json). This repository also ships an MCP server (node scripts/mcp.mjs) and a static triage CLI (node scripts/triage.mjs <file>). See docs/API.md, docs/MCP.md and docs/TRIAGE.md in the repository.
+
 Flags: runs = executes or emulates target code, or loads third-party plugins and scripts (use an isolated VM); cloud = sends code to a third party when used as documented; impersonated = lookalike download sites reported, use the official link only. No flag = reviewed, none of these known.
 
 ## Identify & Triage

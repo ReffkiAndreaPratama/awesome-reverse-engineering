@@ -1,0 +1,22 @@
+{
+  "name": "awesome-reverse-engineering",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Curated reverse engineering tools with safety flags, a static JSON API, an MCP server and a static triage CLI.",
+  "type": "module",
+  "license": "CC0-1.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:offline": "node scripts/build.mjs --offline",
+    "check": "node scripts/build.mjs --check",
+    "site": "node scripts/site.mjs",
+    "test": "node --test scripts/test.mjs",
+    "verify": "node scripts/build.mjs --check && node --test scripts/test.mjs && node scripts/site.mjs",
+    "health": "node scripts/health.mjs",
+    "mcp": "node scripts/mcp.mjs",
+    "triage": "node scripts/triage.mjs"
+  }
+}

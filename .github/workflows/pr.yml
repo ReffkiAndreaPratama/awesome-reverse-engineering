@@ -16,7 +16,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Run tests
+        run: node --test scripts/test.mjs
       - name: Validate data.json and check generated files are up to date
+        env:
+          SITE_BASE: ${{ vars.SITE_BASE }}
+          SITE_REPO: ${{ vars.SITE_REPO }}
+          SITE_AUTHOR: ${{ vars.SITE_AUTHOR }}
+          SITE_AUTHOR_URL: ${{ vars.SITE_AUTHOR_URL }}
         run: node scripts/build.mjs --check
       - name: Check links in the proposed README
         uses: lycheeverse/lychee-action@v2

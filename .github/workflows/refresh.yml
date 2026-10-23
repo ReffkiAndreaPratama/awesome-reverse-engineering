@@ -23,6 +23,10 @@ jobs:
       - name: Refresh GitHub data and rebuild outputs (fails if most lookups fail)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_BASE: ${{ vars.SITE_BASE }}
+          SITE_REPO: ${{ vars.SITE_REPO }}
+          SITE_AUTHOR: ${{ vars.SITE_AUTHOR }}
+          SITE_AUTHOR_URL: ${{ vars.SITE_AUTHOR_URL }}
         run: node scripts/build.mjs
       - name: Commit if changed
         run: |

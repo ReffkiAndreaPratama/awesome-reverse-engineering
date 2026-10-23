@@ -1,0 +1,6 @@
+# Generated Markdown, JSON and SVG must match on Linux CI and Windows checkouts.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.webp binary

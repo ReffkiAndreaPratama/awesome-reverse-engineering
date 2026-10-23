@@ -6,11 +6,17 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ICON } from './icons.mjs';
 import { FAQ, COMPARE } from './site-content.mjs';
+import { buildApi } from './api.mjs';
+import { siteConfig } from '../lib/site-config.mjs';
+import { slugify, entryView, createContext, STALE_INFO } from '../lib/normalize.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const OUT = join(ROOT, '_site');
-const BASE = 'https://edwardtay.github.io/awesome-reverse-engineering';
-const REPO = 'https://github.com/edwardtay/awesome-reverse-engineering';
+const SITE = siteConfig();
+const BASE = SITE.base;
+const REPO = SITE.repoUrl;
+const AUTHOR = SITE.author;
+const AUTHOR_URL = SITE.authorUrl;
 const data = JSON.parse(readFileSync(join(ROOT, 'data.json'), 'utf8'));
 const meta = existsSync(join(ROOT, 'data', 'meta.json')) ? JSON.parse(readFileSync(join(ROOT, 'data', 'meta.json'), 'utf8')) : {};
 const REVIEWED = data.reviewed;
@@ -23,7 +29,7 @@ const strip = t => t.replace(/^\S+\s/, '');
 const ghRepo = u => u.match(/^https:\/\/github\.com\/([\w.-]+\/[\w.-]+?)\/?$/)?.[1] ?? null;
 const repoOf = e => e.r || ghRepo(e.u);
 const stars = n => (n == null ? '' : n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '')}k` : String(n));
-const FLAG = { runs: ['▶', 'Runs code: use an isolated VM'], cloud: ['☁', 'Sends code to a third party'], impersonated: ['◆', 'Impersonated: official link only'] };
+const FLAG = { runs: ['▶', 'Runs code: use an isolated VM'], cloud: ['☁', 'Sends code to a third party'], impersonated: ['🎭', 'Impersonated: official link only'] };
 function maint(e) {
   const m = meta[repoOf(e)] || {};
   if (e.m) return e.m;
@@ -54,11 +60,17 @@ h1{font-size:clamp(28px,4.4vw,44px);line-height:1.1;letter-spacing:-.02em;margin
 #results{margin-top:12px;display:grid;gap:8px}#results .r{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 14px;overflow-wrap:break-word}#results .r small{color:var(--soft)}
 .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
 table{border-collapse:separate;border-spacing:0;width:100%;min-width:760px;font-size:15px}
+.facts{min-width:0}.facts th{position:static;width:170px;background:transparent;border-bottom:1px solid #f3f4f6;color:var(--soft);font-size:13px;text-transform:none;letter-spacing:0;white-space:normal;vertical-align:top}
+.facts td{background:var(--card)}
+.facts tr:hover td{background:var(--card)}
+.facts th:first-child,.facts td:first-child{position:static;box-shadow:none}
+.tools{columns:2;column-gap:32px;padding-left:20px}.tools li{margin:0 0 8px;break-inside:avoid}
+@media(max-width:700px){.tools{columns:1}}
 th{position:sticky;top:0;background:#f9fafb;color:var(--soft);font-size:12px;text-transform:uppercase;letter-spacing:.04em;text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);word-break:keep-all;white-space:nowrap;z-index:2}
 td{padding:10px 12px;border-top:1px solid #f3f4f6;vertical-align:top;overflow-wrap:break-word;background:var(--card)}
 tr:hover td{background:#f5f7ff}
 th:first-child,td:first-child{position:sticky;left:0;z-index:1;box-shadow:1px 0 0 var(--line),6px 0 10px -8px rgba(17,24,39,.3)}th:first-child{z-index:3;background:#f9fafb}
-td.n{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--soft);white-space:nowrap}td:first-child a{font-weight:600}
+td.n{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--soft);white-space:nowrap}td:first-child a{font-weight:600}td:first-child a.src{font-weight:400;font-size:12px;color:var(--soft)}
 .flag{display:inline-block;font:600 12px ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid #c7d2fe;color:var(--brand);background:#fff;border-radius:999px;padding:1px 8px;margin:2px 4px 2px 0;white-space:nowrap}
 .flag.w{border-color:#fde68a;color:var(--warn);background:var(--warnbg)}
 .strip{width:100%;height:auto;margin:8px 0 4px}
@@ -83,7 +95,7 @@ function page({ path, title, description, body, jsonld = [], ogType = 'website' 
 <title>${h(title)}</title>
 <meta name="description" content="${h(description)}">
 <link rel="canonical" href="${url}">
-<meta name="author" content="Edward Tay">
+<meta name="author" content="${h(AUTHOR)}">
 <meta property="og:type" content="${ogType}"><meta property="og:title" content="${h(title)}"><meta property="og:description" content="${h(description)}"><meta property="og:url" content="${url}"><meta property="og:image" content="${BASE}/assets/social-preview.jpg">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${BASE}/assets/social-preview.jpg">
 <link rel="alternate" type="text/plain" title="llms.txt" href="${rel}llms.txt">
@@ -96,17 +108,17 @@ ${jsonld.map(j => `<script type="application/ld+json">${JSON.stringify(j)}</scri
 <main class="wrap">
 ${body}
 </main>
-<footer><div class="wrap">Entries reviewed ${REVIEWED}; GitHub data refreshed ${REFRESHED}. Released under CC0. Source: <a href="${REPO}">GitHub</a> · <a href="${rel}data.json">data.json</a> · <a href="${rel}llms.txt">llms.txt</a></div></footer>
+<footer><div class="wrap">Entries reviewed ${REVIEWED}; GitHub data refreshed ${REFRESHED}. Released under CC0. Source: <a href="${REPO}">GitHub</a> · <a href="${rel}data.json">data.json</a> · <a href="${rel}llms.txt">llms.txt</a> · <a href="${rel}api/index.json">API</a></div></footer>
 </body>
 </html>
 `;
 }
 
-function entryRow(e) {
+function entryRow(e, prefix = '../../') {
   const m = meta[repoOf(e)] || {};
   const mt = maint(e);
   const flags = (e.f || []).map(f => `<span class="flag" title="${h(FLAG[f][1])}">${FLAG[f][0]} ${f}</span>`).join('') + (mt ? `<span class="flag w" title="${h(mt)}">⚠ ${h(mt)}</span>` : '');
-  return `<tr><td><a href="${h(e.u)}" rel="noopener">${h(e.n)}</a></td><td>${md(e.d)}${flags ? `<div>${flags}</div>` : ''}</td><td>${h(e.cost)}</td><td class="n">${repoOf(e) ? `${m.pushed ? m.pushed.slice(0, 7) : ''}${m.stars != null ? ` · ★ ${stars(m.stars)}` : ''}` : 'website'}</td></tr>`;
+  return `<tr><td><a href="${prefix}t/${slugify(e.n)}/">${h(e.n)}</a><br><a class="src" href="${h(e.u)}" rel="noopener">source</a></td><td>${md(e.d)}${flags ? `<div>${flags}</div>` : ''}</td><td>${h(e.cost)}</td><td class="n">${repoOf(e) ? `${m.pushed ? m.pushed.slice(0, 7) : ''}${m.stars != null ? ` · ★ ${stars(m.stars)}` : ''}` : 'website'}</td></tr>`;
 }
 
 function build() {
@@ -116,6 +128,8 @@ function build() {
   const urls = [];
   const cats = data.categories.map(c => ({ ...c, name: strip(c.title), entries: data.entries.filter(e => e.c === c.id) }));
   const flagged = data.entries.filter(e => e.f?.length).length;
+  const ctx = createContext(data, meta);
+  const views = data.entries.map(e => entryView(e, ctx));
 
   // ---------- home ----------
   const faqHtml = FAQ.map(f => `<details><summary>${h(f.q)}</summary><p>${h(f.a)}</p></details>`).join('\n');
@@ -124,7 +138,7 @@ function build() {
     title: `Awesome Reverse Engineering: ${data.entries.length} tools with safety flags (${YEAR})`,
     description: `A curated, weekly-refreshed list of ${data.entries.length} reverse engineering tools for binaries, Android, .NET, firmware and smart contracts, with a safety flag on every entry and MCP servers for AI agents.`,
     jsonld: [
-      { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Awesome Reverse Engineering', url: `${BASE}/`, inLanguage: 'en', author: { '@type': 'Person', name: 'Edward Tay', url: 'https://github.com/edwardtay' }, dateModified: REFRESHED },
+      { '@context': 'https://schema.org', '@type': 'WebSite', name: 'Awesome Reverse Engineering', url: `${BASE}/`, inLanguage: 'en', author: { '@type': 'Person', name: AUTHOR, url: AUTHOR_URL }, dateModified: REFRESHED },
       { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map(f => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
       { '@context': 'https://schema.org', '@type': 'ItemList', name: 'Reverse engineering tool categories', itemListElement: cats.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c.name, url: `${BASE}/c/${c.id}/` })) },
     ],
@@ -135,21 +149,26 @@ function build() {
 <div class="stats"><div class="stat"><b>${data.entries.length}</b><span>entries</span></div><div class="stat"><b>${cats.length}</b><span>categories</span></div><div class="stat"><b>${flagged}</b><span>with a safety flag</span></div><div class="stat"><b>${REFRESHED}</b><span>last GitHub refresh</span></div></div>
 <input class="search" id="q" type="search" placeholder="Search ${data.entries.length} tools: ghidra, android, firmware, mcp..." aria-label="Search tools">
 <div id="results"></div>
+<p class="meta"><a href="all/">Browse all ${views.length} tools</a> · <a href="api/index.json">JSON API</a></p>
 <h2 id="categories">Categories</h2>
 <div class="grid">${cats.map(c => `<a class="cat" href="c/${c.id}/"><span class="ic">${icon(c.id)}</span><span><b>${h(c.name)}</b><small>${c.entries.length} entries · ${h(c.entries.slice(0, 3).map(e => e.n).join(', '))}</small></span></a>`).join('')}</div>
 <h2>Compare</h2>
 <p><a href="compare/${COMPARE.slug}/">${h(COMPARE.title)}</a>: price, decompilation, scripting, AI integration and security notes side by side.</p>
-<h2>Safety first</h2>
+<h2 id="safety-first">Safety first</h2>
 <p class="note">Analyse in a full VM with no route out, download tools only from the official source (lookalike sites for Ghidra, dnSpy and ILSpy have pushed malware), treat project files and proof-of-concept repos as code, look up hashes instead of uploading, and keep approvals on when an AI agent reads a hostile binary.</p>
 <h2 id="faq">Frequently asked questions</h2>
 ${faqHtml}
 <script>
-const D=${JSON.stringify(data.entries.map(e => ({ n: e.n, u: e.u, d: e.d, c: cats.find(c => c.id === e.c).name, id: e.c, f: e.f || [] })))};
+const D=${JSON.stringify(views.map(v => ({ n: v.name, s: v.slug, u: v.url, d: v.description, c: v.category.name, id: v.category.id, f: v.flags.map(f => f.id), t: v.tags })))};
 const q=document.getElementById('q'),r=document.getElementById('results');
 const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-q.addEventListener('input',()=>{const t=q.value.trim().toLowerCase();if(!t){r.innerHTML='';return}
-const hits=D.filter(e=>(e.n+' '+e.d+' '+e.c).toLowerCase().includes(t)).slice(0,30);
-r.innerHTML=hits.length?hits.map(e=>'<div class="r"><a href="'+esc(e.u)+'"><b>'+esc(e.n)+'</b></a> <small>· <a href="c/'+e.id+'/">'+esc(e.c)+'</a>'+(e.f.length?' · '+e.f.join(', '):'')+'</small><br>'+esc(e.d)+'</div>').join(''):'<div class="r">No match. Try a broader word.</div>'});
+const norm=s=>s.toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'');
+q.addEventListener('input',()=>{const t=norm(q.value.trim());if(!t){r.innerHTML='';return}
+const toks=t.split(/\s+/).filter(Boolean);
+const hits=D.map(e=>{const name=norm(e.n),desc=norm(e.d),cat=norm(e.c),tags=norm(e.t.join(' '));let score=0;
+for(const x of toks){const p=name===x?100:name.startsWith(x)?70:name.includes(x)?45:tags.includes(x)?25:desc.includes(x)?12:cat.includes(x)?8:0;if(!p)return null;score+=p}
+return {e,score}}).filter(Boolean).sort((a,b)=>b.score-a.score).slice(0,30).map(x=>x.e);
+r.innerHTML=hits.length?hits.map(e=>'<div class="r"><a href="t/'+esc(e.s)+'/"><b>'+esc(e.n)+'</b></a> <small>· <a href="c/'+e.id+'/">'+esc(e.c)+'</a>'+(e.f.length?' · '+e.f.join(', '):'')+' · <a href="'+esc(e.u)+'" rel="noopener">source</a></small><br>'+esc(e.d)+'</div>').join(''):'<div class="r">No match. Try a broader word.</div>'});
 </script>`,
   });
   write('index.html', home); urls.push('');
@@ -172,7 +191,7 @@ r.innerHTML=hits.length?hits.map(e=>'<div class="r"><a href="'+esc(e.u)+'"><b>'+
 <h1 style="margin-top:4px">${h(c.name)}</h1>
 <p class="lede">${md(c.intro)}</p>
 <p class="meta">${c.entries.length} entries · reviewed ${REVIEWED} · GitHub data ${REFRESHED}</p>
-<div class="tbl"><table><thead><tr><th>Tool</th><th>Use it when</th><th>Cost</th><th>Last push · Stars</th></tr></thead><tbody>${c.entries.map(entryRow).join('')}</tbody></table></div>
+<div class="tbl"><table><thead><tr><th>Tool</th><th>Use it when</th><th>Cost</th><th>Last push · Stars</th></tr></thead><tbody>${c.entries.map(e => entryRow(e)).join('')}</tbody></table></div>
 ${c.id === 'disasm' ? `<p>Choosing between the big three? Read <a href="../../compare/${COMPARE.slug}/">${h(COMPARE.title)}</a>.</p>` : ''}
 <p class="meta">Flags: ▶ runs code (use an isolated VM) · ☁ sends code to a third party · ◆ commonly impersonated (official link only) · ⚠ maintenance concern</p>
 <p>${prev ? `← <a href="../${prev.id}/">${h(prev.name)}</a>` : ''}${prev && next ? ' · ' : ''}${next ? `<a href="../${next.id}/">${h(next.name)}</a> →` : ''}</p>`,
@@ -188,7 +207,7 @@ ${c.id === 'disasm' ? `<p>Choosing between the big three? Read <a href="../../co
     description: COMPARE.lede.replace('{{REVIEWED}}', REVIEWED),
     ogType: 'article',
     jsonld: [
-      { '@context': 'https://schema.org', '@type': 'Article', headline: COMPARE.title, dateModified: REVIEWED, author: { '@type': 'Person', name: 'Edward Tay', url: 'https://github.com/edwardtay' }, mainEntityOfPage: `${BASE}/compare/${COMPARE.slug}/` },
+      { '@context': 'https://schema.org', '@type': 'Article', headline: COMPARE.title, dateModified: REVIEWED, author: { '@type': 'Person', name: AUTHOR, url: AUTHOR_URL }, mainEntityOfPage: `${BASE}/compare/${COMPARE.slug}/` },
       { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Awesome Reverse Engineering', item: `${BASE}/` }, { '@type': 'ListItem', position: 2, name: COMPARE.title, item: `${BASE}/compare/${COMPARE.slug}/` }] },
     ],
     body: `
@@ -202,7 +221,78 @@ ${c.id === 'disasm' ? `<p>Choosing between the big three? Read <a href="../../co
   }));
   urls.push(`compare/${COMPARE.slug}/`);
 
+  // ---------- per-tool pages ----------
+  const sorted = [...views].sort((a, b) => a.name.localeCompare(b.name));
+  views.forEach(v => {
+    const alts = views
+      .filter(x => x.category.id === v.category.id && x.slug !== v.slug)
+      .sort((a, b) => (b.maintenance.stars ?? 0) - (a.maintenance.stars ?? 0) || a.name.localeCompare(b.name))
+      .slice(0, 5);
+    const badges = v.flags.map(f => `<span class="flag" title="${h(FLAG[f.id][1])}">${FLAG[f.id][0]} ${f.id}</span>`).join('') +
+      (v.maintenance.warning ? `<span class="flag w" title="${h(v.maintenance.note)}">${STALE_INFO.symbol} ${h(v.maintenance.note)}</span>` : '');
+    const facts = [
+      ['Official source', `<a href="${h(v.url)}" rel="noopener">${h(v.url)}</a>`],
+      ['Category', `<a href="../../c/${v.category.id}/">${h(v.category.name)}</a>`],
+      ['Cost', `${h(v.cost.label)}${v.cost.note ? ` <small>(${h(v.cost.note)})</small>` : ''}`],
+      ['Safety flags', badges || 'None known at review'],
+      ['Maintenance', v.maintenance.note ? h(v.maintenance.note) : 'No known concern'],
+      ['Last push', v.maintenance.lastPush ? h(v.maintenance.lastPush) : 'not tracked'],
+      ['Stars', v.maintenance.stars != null ? `${stars(v.maintenance.stars)} on GitHub` : 'not tracked'],
+      ['Reviewed', h(v.reviewed)],
+      ['Machine-readable', `<a href="../../api/tools/${v.slug}.json">JSON</a>`],
+    ].map(([k, val]) => `<tr><th>${k}</th><td>${val}</td></tr>`).join('');
+
+    write(`t/${v.slug}/index.html`, page({
+      path: `t/${v.slug}/`,
+      title: `${v.name}: ${v.category.name} tool with safety notes (${YEAR})`,
+      description: `${v.description} Cost: ${v.cost.label}. Reviewed for execution and disclosure risk on ${v.reviewed}.`,
+      ogType: 'article',
+      jsonld: [
+        { '@context': 'https://schema.org', '@type': 'SoftwareApplication', name: v.name, description: v.description, url: v.url, applicationCategory: 'DeveloperApplication', ...(v.cost.free ? { offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' } } : {}) },
+        { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Awesome Reverse Engineering', item: `${BASE}/` },
+          { '@type': 'ListItem', position: 2, name: v.category.name, item: `${BASE}/c/${v.category.id}/` },
+          { '@type': 'ListItem', position: 3, name: v.name, item: `${BASE}/t/${v.slug}/` },
+        ] },
+      ],
+      body: `
+<p class="crumbs"><a href="../../">Awesome Reverse Engineering</a> / <a href="../../c/${v.category.id}/">${h(v.category.name)}</a> / ${h(v.name)}</p>
+<p class="meta">${h(v.category.name.toUpperCase())} · REVIEWED ${h(v.reviewed)}</p>
+<h1>${h(v.name)}</h1>
+<p class="lede">${md(v.description)}</p>
+${badges ? `<p>${badges}</p>` : ''}
+<div class="tbl"><table class="facts"><tbody>${facts}</tbody></table></div>
+<h2>Safety notes</h2>
+${v.flags.length ? `<ul>${v.flags.map(f => `<li><b>${h(f.label)}</b>: ${h(f.meaning)}</li>`).join('')}</ul>` : '<p>No execution, disclosure or impersonation flag was known at review. Any parser of hostile input can have bugs, so the VM rule still applies.</p>'}
+<p class="meta"><a href="../../#safety-first">Read the safety rules</a> · ${h(v.maintenance.warning ? 'This entry carries a maintenance warning.' : 'Maintenance looked healthy at the last refresh.')}</p>
+${alts.length ? `<h2>Alternatives in ${h(v.category.name)}</h2><ul class="tools">${alts.map(a => `<li><a href="../${a.slug}/">${h(a.name)}</a>: ${h(a.description)}</li>`).join('')}</ul>` : ''}
+<p><a href="${h(v.url)}" rel="noopener">Official source</a> · <a href="../../c/${v.category.id}/">All ${h(v.category.name)} tools</a> · <a href="../../api/tools/${v.slug}.json">JSON</a></p>`,
+    }));
+    urls.push(`t/${v.slug}/`);
+  });
+
+  // ---------- all tools ----------
+  const groups = new Map();
+  for (const v of sorted) {
+    const key = /[a-z]/i.test(v.name[0]) ? v.name[0].toUpperCase() : '#';
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(v);
+  }
+  write('all/index.html', page({
+    path: 'all/',
+    title: `All ${views.length} reverse engineering tools, A to Z (${YEAR})`,
+    description: `Every entry in the list, grouped alphabetically, with category, cost and safety flags. ${views.length} tools reviewed for execution and disclosure risk.`,
+    body: `
+<p class="crumbs"><a href="../">Awesome Reverse Engineering</a> / All tools</p>
+<h1>All ${views.length} tools</h1>
+<p class="lede">Every entry, grouped alphabetically. Each tool page carries the description, cost, safety flags, maintenance state and alternatives.</p>
+${[...groups].map(([letter, list]) => `<h2 id="${letter.toLowerCase()}">${letter}</h2><ul class="tools">${list.map(v => `<li><a href="../t/${v.slug}/">${h(v.name)}</a> <small>· ${h(v.category.name)}${v.flags.length ? ` · ${v.flags.map(f => f.id).join(', ')}` : ''}</small></li>`).join('')}</ul>`).join('')}`,
+  }));
+  urls.push('all/');
+
   // ---------- machine layer ----------
+  const api = buildApi({ data, meta, base: BASE, reviewed: REVIEWED, refreshed: REFRESHED });
+  for (const [path, payload] of api) write(path, JSON.stringify(payload, null, 2) + '\n');
   write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(u => `  <url><loc>${BASE}/${u}</loc><lastmod>${REFRESHED}</lastmod></url>`).join('\n')}\n</urlset>\n`);
   write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${BASE}/sitemap.xml\n`);
   write('404.html', page({ path: '404.html', title: 'Not found · Awesome Reverse Engineering', description: 'Page not found.', body: '<h1>Page not found</h1><p><a href="./">Back to the list</a></p>' }));

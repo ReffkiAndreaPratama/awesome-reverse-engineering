@@ -9,8 +9,10 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ICON } from './icons.mjs';
+import { siteConfig } from '../lib/site-config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const SITE = siteConfig(process.env, { autoRepo: false });
 const CHECK = process.argv.includes('--check');
 const OFFLINE = CHECK || process.argv.includes('--offline');
 const STALE_DAYS = 365;
@@ -91,7 +93,7 @@ async function refresh() {
 const esc = s => String(s).replace(/\|/g, '\\|');
 const xml = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 const fmtStars = n => (n == null ? '' : n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1).replace(/\.0$/, '')}k` : String(n));
-const daysSince = d => (d ? Math.floor((Date.parse(TODAY) - Date.parse(d)) / 864e5) : null);
+const daysSince = d => (d ? Math.floor((Date.parse(meta._refreshed || TODAY) - Date.parse(d)) / 864e5) : null);
 // GitHub and awesome-lint anchors: lowercase, drop punctuation and symbols (including U+FE0F), spaces to hyphens
 const slug = h => '#' + h.toLowerCase().replace(/️/g, '').replace(/[^\p{L}\p{N}\p{Mc}\p{Mn}\p{Pc}\- ]/gu, '').replace(/ /g, '-');
 const stripEmoji = t => t.replace(/^\S+\s/, '');
@@ -209,10 +211,12 @@ async function main() {
     .replaceAll('{{REFRESHED}}', refreshed)
     .replaceAll('{{REVIEWED}}', data.reviewed || refreshed)
     .replaceAll('{{STALE}}', String(stale.length))
-    .replaceAll('{{FLAGGED}}', String(flagged));
-  const header = fill(readFileSync(join(ROOT, 'content', 'header.md'), 'utf8'));
-  const intro = fill(readFileSync(join(ROOT, 'content', 'intro.md'), 'utf8'));
-  const footer = fill(readFileSync(join(ROOT, 'content', 'footer.md'), 'utf8'));
+    .replaceAll('{{FLAGGED}}', String(flagged))
+    .replaceAll('{{SITE}}', SITE.base);
+  const readContent = name => readFileSync(join(ROOT, 'content', name), 'utf8').replace(/\r\n/g, '\n');
+  const header = fill(readContent('header.md'));
+  const intro = fill(readContent('intro.md'));
+  const footer = fill(readContent('footer.md'));
   const body = [intro.trimEnd(), '', ...sections, footer.trimEnd(), ''].join('\n');
   const toc = [...body.matchAll(/^## (.+)$/gm)].filter(m => !/Contributing/.test(m[1])).map(m => `- [${m[1]}](${slug(m[1])})`).join('\n');
   out['README.md'] = alignTables(header.replace('{{TOC}}', toc).trimEnd() + '\n\n' + body);
@@ -227,6 +231,7 @@ async function main() {
   out['llms.txt'] = [
     '# Awesome Reverse Engineering', '',
     `> Curated reverse engineering tools and learning resources with safety flags and maintenance data. ${data.entries.length} entries. Entries reviewed ${data.reviewed}; GitHub data refreshed ${refreshed}.`, '',
+    'Machine-readable: the website publishes a static JSON API under api/ (api/index.json, api/entries.json, api/search-index.json). This repository also ships an MCP server (node scripts/mcp.mjs) and a static triage CLI (node scripts/triage.mjs <file>). See docs/API.md, docs/MCP.md and docs/TRIAGE.md in the repository.', '',
     'Flags: runs = executes or emulates target code, or loads third-party plugins and scripts (use an isolated VM); cloud = sends code to a third party when used as documented; impersonated = lookalike download sites reported, use the official link only. No flag = reviewed, none of these known.', '',
     ...data.categories.flatMap(c => [`## ${stripEmoji(c.title)}`, '', ...data.entries.filter(e => e.c === c.id).map(e => {
       const r = repoOf(e); const m = r ? meta[r] || {} : {}; const mt = maintenance(e);
